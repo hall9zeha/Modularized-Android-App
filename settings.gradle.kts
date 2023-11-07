@@ -10,9 +10,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
 rootProject.name = "ModularizedApp"
 include(":app")
- 
+include(":domain")
+include(":core")
+include(":domain:models")

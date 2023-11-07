@@ -1,0 +1,22 @@
+[versions]
+retrofit = "2.9.0"
+retrofitKotlinxSerializationJson = "1.0.0"
+room = "2.6.0"
+application = "8.1.1"
+kotlin = "1.9.0"
+library = "8.1.1"
+jvm = "1.9.0"
+
+[libraries]
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+[plugins]
+android = { id = "com.android.application", version.ref = "application" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+library = { id = "com.android.library", version.ref = "library" }
+jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
