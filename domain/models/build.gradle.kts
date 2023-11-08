@@ -1,7 +1,8 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -41,7 +42,11 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(project(":app"))
 
-   /* implementation(libs.libraries.retrofit-core)
-    implementation(libs.libraries.room-runtime)*/
+    implementation (libs.retrofit.core)
+    implementation (libs.retrofit.kotlin.serialization)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
 }
