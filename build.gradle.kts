@@ -9,4 +9,5 @@ plugins {
     alias(libs.plugins.jvm) apply(false)
     alias(libs.plugins.library) apply(false)
     alias(libs.plugins.kapt) apply(false)
+    alias(libs.plugins.hilt) apply(false)
 }

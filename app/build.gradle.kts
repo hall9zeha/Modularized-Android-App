@@ -2,6 +2,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
+
 }
 
 android {
@@ -28,12 +31,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -47,8 +50,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
     // Modules
     implementation(project(":domain"))
+    implementation(project(":data"))
+
     //implementation(libs.libraries.retrofit-core)
 
 }

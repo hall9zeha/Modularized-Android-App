@@ -19,3 +19,5 @@ include(":app")
 include(":domain")
 include(":core")
 include(":domain:models")
+include(":data")
+
