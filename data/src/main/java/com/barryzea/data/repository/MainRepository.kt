@@ -1,6 +1,8 @@
 package com.barryzea.data.repository
 
+import com.barryzea.data.database.db.MyDatabase
 import com.barryzea.models.model.ImageEntity
+import javax.inject.Inject
 
 
 /**
@@ -9,20 +11,14 @@ import com.barryzea.models.model.ImageEntity
  * Copyright (c)  All rights reserved.
  **/
 
-class MainRepository : MainRepositoryInterface {
-    override suspend fun saveRegister(entity: ImageEntity): Long {
-        TODO("Not yet implemented")
-    }
+class MainRepository @Inject constructor(database: MyDatabase): MainRepositoryInterface {
+    private val dao = database.getDao()
+    override suspend fun saveRegister(entity: ImageEntity) = dao.saveRegister(entity)
 
-    override suspend fun updateRegister(entity: ImageEntity): Int {
-        TODO("Not yet implemented")
-    }
 
-    override suspend fun deleteRegister(entity: ImageEntity): Int {
-        TODO("Not yet implemented")
-    }
+    override suspend fun updateRegister(entity: ImageEntity) = dao.updateRegister(entity)
 
-    override suspend fun getAllRegisters(): List<ImageEntity> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteRegister(idEntity: Long) = dao.deleteRegister(idEntity)
+
+    override suspend fun getAllRegisters(): List<ImageEntity> = dao.getAllRegisters()
 }

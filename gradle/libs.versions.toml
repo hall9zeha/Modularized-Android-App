@@ -13,9 +13,10 @@ espresso-core = "3.5.1"
 appcompat = "1.6.1"
 material = "1.10.0"
 hilt = "2.48.1"
+activity = "1.8.0"
 
 [libraries]
-
+activity-ktx = {group ="androidx.activity", name ="activity-ktx", version.ref = "activity"}
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }

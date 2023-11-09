@@ -12,6 +12,6 @@ import com.barryzea.models.model.ImageEntity
 interface MainRepositoryInterface {
  suspend fun saveRegister(entity: ImageEntity):Long
  suspend fun updateRegister(entity:ImageEntity):Int
- suspend fun deleteRegister(entity:ImageEntity):Int
+ suspend fun deleteRegister(idEntity:Long):Int
  suspend fun getAllRegisters():List<ImageEntity>
 }

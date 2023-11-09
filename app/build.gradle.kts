@@ -38,6 +38,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -52,8 +55,10 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    implementation(libs.activity.ktx)
     // Modules
     implementation(project(":domain"))
+    implementation(project(":domain:models"))
     implementation(project(":data"))
 
     //implementation(libs.libraries.retrofit-core)
