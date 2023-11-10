@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.barryzea.data.repository.MainRepository
 import com.barryzea.models.model.ImageEntity
 import com.barryzea.modularizedapp.ui.common.ScopedViewModel
+import com.barryzea.modularizedapp.ui.common.SingleMutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,19 +23,30 @@ class MainViewModel @Inject constructor(private val repository: MainRepository):
     private var _allRegisters:MutableLiveData<List<ImageEntity>> = MutableLiveData()
     val allRegisters:LiveData<List<ImageEntity>> = _allRegisters
 
-    private var _idOfRegisterInserted:MutableLiveData<Long> = MutableLiveData()
-    val idOfRegisterInserted:LiveData<Long> = _idOfRegisterInserted
+    private var _entity:SingleMutableLiveData<ImageEntity> = SingleMutableLiveData()
+    val entity:SingleMutableLiveData<ImageEntity> = _entity
+
+    private var _idOfRegisterInserted:SingleMutableLiveData<Long> = SingleMutableLiveData()
+    val idOfRegisterInserted:SingleMutableLiveData<Long> = _idOfRegisterInserted
 
     private var _updatedRegisterRow:MutableLiveData<Int> = MutableLiveData()
     val updatedRegisterRow:LiveData<Int> = _updatedRegisterRow
 
     private var _deletedRegisterRow:MutableLiveData<Int> = MutableLiveData()
     val deletedRegisterRow:LiveData<Int> = _deletedRegisterRow
+
+    private var _registerId:SingleMutableLiveData<Long> = SingleMutableLiveData()
+    val registerId:SingleMutableLiveData<Long> = _registerId
+
+
     init {
         initScope()
     }
     fun fetchAllRegisters(){
         launch {_allRegisters.value =repository.getAllRegisters()}
+    }
+    fun getRegisterById(id: Long){
+        launch { _entity.value = repository.getRegisterById(id) }
     }
     fun saveRegister(entity: ImageEntity){
         launch {_idOfRegisterInserted.value = repository.saveRegister(entity) }
@@ -44,6 +56,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepository):
     }
     fun deleteRegister(idEntity: Long){
         launch { _deletedRegisterRow.value = repository.deleteRegister(idEntity) }
+    }
+    fun setRegisterId(id:Long){
+        _registerId.value = id
     }
 
 }

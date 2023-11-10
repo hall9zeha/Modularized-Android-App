@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.activity.ktx)
+    implementation(libs.fragment.ktx)
     // Modules
     implementation(project(":domain"))
     implementation(project(":domain:models"))

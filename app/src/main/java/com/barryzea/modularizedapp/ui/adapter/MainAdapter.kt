@@ -25,11 +25,18 @@ class MainAdapter:RecyclerView.Adapter<MainViewHolder>() {
  fun addAll(registers:List<ImageEntity>){
   registers.forEach { addItem(it) }
  }
- private fun addItem(entity:ImageEntity){
+ fun addItem(entity:ImageEntity){
   if(!registerList.contains(entity)){
    registerList.add(entity)
    notifyItemInserted(registerList.size -1)
+  }else{
+   update(entity)
   }
+ }
+ private fun update(entity:ImageEntity){
+  val index = registerList.indexOf(entity)
+  registerList[index] = entity
+  notifyItemChanged(index)
  }
  override fun getItemCount() = registerList.size
 

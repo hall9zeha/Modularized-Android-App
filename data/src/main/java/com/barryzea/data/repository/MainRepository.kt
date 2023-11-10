@@ -21,4 +21,5 @@ class MainRepository @Inject constructor(database: MyDatabase): MainRepositoryIn
     override suspend fun deleteRegister(idEntity: Long) = dao.deleteRegister(idEntity)
 
     override suspend fun getAllRegisters(): List<ImageEntity> = dao.getAllRegisters()
+    override suspend fun getRegisterById(id: Long) = dao.getRegisterById(id)
 }

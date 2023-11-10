@@ -14,4 +14,5 @@ interface MainRepositoryInterface {
  suspend fun updateRegister(entity:ImageEntity):Int
  suspend fun deleteRegister(idEntity:Long):Int
  suspend fun getAllRegisters():List<ImageEntity>
+ suspend fun getRegisterById(id:Long):ImageEntity
 }

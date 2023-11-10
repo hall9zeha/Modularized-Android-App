@@ -2,6 +2,7 @@ package com.barryzea.modularizedapp.ui.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -26,11 +27,17 @@ class MainActivity : AppCompatActivity() {
         setUpViewModel()
         setUpListeners()
     }
-
-
     private fun setUpViewModel(){
+        viewModel.fetchAllRegisters()
         viewModel.allRegisters.observe(this){
+            Log.e("TAG", it.toString() )
             adapter.addAll(it)
+        }
+        viewModel.registerId.observe(this){
+            viewModel.getRegisterById(it!!)
+        }
+        viewModel.entity.observe(this){
+            adapter.addItem(it!!)
         }
     }
     private fun setUpAdapter(){

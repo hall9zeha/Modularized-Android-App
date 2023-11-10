@@ -3,6 +3,7 @@ package com.barryzea.modularizedapp.ui.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.models.model.ImageEntity
+import com.barryzea.modularizedapp.databinding.ItemLayoutBinding
 
 
 /**
@@ -12,7 +13,8 @@ import com.barryzea.models.model.ImageEntity
  **/
 
 class MainViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
- fun onBind(imageEntity: ImageEntity){
-
+ private val bind=ItemLayoutBinding.bind(itemView)
+ fun onBind(imageEntity: ImageEntity) = with(bind){
+   tvDetail.text=imageEntity.description
  }
 }

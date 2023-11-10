@@ -28,4 +28,7 @@ interface MyDao {
     @Query("select * from ImageEntity")
     suspend fun getAllRegisters():List<ImageEntity>
 
+    @Query("select * from ImageEntity where id=:id")
+    suspend fun getRegisterById(id:Long):ImageEntity
+
 }
