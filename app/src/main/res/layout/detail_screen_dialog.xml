@@ -35,6 +35,7 @@
             android:layout_height="match_parent"
             android:id="@+id/tvContent"
             android:padding="8dp"
+            android:background="@android:color/transparent"
             tools:text="prueba de texto "
             android:gravity="start"
             android:singleLine="false"/>
