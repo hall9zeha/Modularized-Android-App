@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.ModularizedApp" parent="Base.Theme.ModularizedApp" />
+    <style name="myFullScreenDialog" parent="ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Window.Fullscreen">
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:theme">@style/myToolbarDrawerStyle</item>
+    </style>
+    <style name="myToolbarDrawerStyle" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+    <style name="MyDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/white</item>
+    </style>
 </resources>

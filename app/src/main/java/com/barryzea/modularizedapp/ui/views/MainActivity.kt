@@ -1,16 +1,14 @@
-package com.barryzea.modularizedapp.ui
+package com.barryzea.modularizedapp.ui.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.barryzea.modularizedapp.R
 import com.barryzea.modularizedapp.databinding.ActivityMainBinding
 import com.barryzea.modularizedapp.ui.adapter.MainAdapter
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -26,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(bind.root)
         setUpAdapter()
         setUpViewModel()
+        setUpListeners()
     }
 
 
@@ -41,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
             layoutManager=staggeredGrid
             adapter=this@MainActivity.adapter
+        }
+    }
+    private fun setUpListeners(){
+        bind.addFab.setOnClickListener {
+            NewRegisterDialog().show(supportFragmentManager.beginTransaction(),NewRegisterDialog::class.java.simpleName)
         }
     }
 }
