@@ -15,6 +15,7 @@ material = "1.10.0"
 hilt = "2.48.1"
 activity = "1.8.0"
 fragment = "1.6.2"
+parcelize = "1.8.10"
 
 [libraries]
 activity-ktx = {group ="androidx.activity", name ="activity-ktx", version.ref = "activity"}
@@ -40,4 +41,5 @@ library = { id = "com.android.library", version.ref = "library" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-parcelize = {id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "parcelize"}
 

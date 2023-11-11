@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.barryzea.models.model.ImageEntity
 import com.barryzea.modularizedapp.databinding.ActivityMainBinding
 import com.barryzea.modularizedapp.ui.adapter.MainAdapter
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setUpAdapter(){
         staggeredGrid = StaggeredGridLayoutManager(2,LinearLayout.VERTICAL)
-        adapter = MainAdapter()
+        adapter = MainAdapter(::onItemClick)
         bind.rvMain.apply {
             setHasFixedSize(true)
             layoutManager=staggeredGrid
@@ -53,5 +54,9 @@ class MainActivity : AppCompatActivity() {
         bind.addFab.setOnClickListener {
             NewRegisterDialog().show(supportFragmentManager.beginTransaction(),NewRegisterDialog::class.java.simpleName)
         }
+    }
+    private fun onItemClick(entity:ImageEntity){
+
+        NewRegisterDialog.newInstance(entity).show(supportFragmentManager.beginTransaction(),NewRegisterDialog::class.java.simpleName)
     }
 }

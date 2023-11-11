@@ -15,7 +15,7 @@ import com.barryzea.modularizedapp.R
  * Copyright (c)  All rights reserved.
  **/
 
-class MainAdapter:RecyclerView.Adapter<MainViewHolder>() {
+class MainAdapter(private val onItemClick:(ImageEntity)->Unit):RecyclerView.Adapter<MainViewHolder>() {
  private var registerList = mutableListOf<ImageEntity>()
  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
   val context = parent.context
@@ -41,7 +41,7 @@ class MainAdapter:RecyclerView.Adapter<MainViewHolder>() {
  override fun getItemCount() = registerList.size
 
  override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-  holder.onBind(registerList[position])
+  holder.onBind(registerList[position], onItemClick)
  }
 
 }

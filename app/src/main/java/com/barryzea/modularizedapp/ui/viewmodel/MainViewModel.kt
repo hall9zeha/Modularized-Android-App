@@ -29,11 +29,11 @@ class MainViewModel @Inject constructor(private val repository: MainRepository):
     private var _idOfRegisterInserted:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val idOfRegisterInserted:SingleMutableLiveData<Long> = _idOfRegisterInserted
 
-    private var _updatedRegisterRow:MutableLiveData<Int> = MutableLiveData()
-    val updatedRegisterRow:LiveData<Int> = _updatedRegisterRow
+    private var _updatedRegisterRow:SingleMutableLiveData<Int> = SingleMutableLiveData()
+    val updatedRegisterRow:SingleMutableLiveData<Int> = _updatedRegisterRow
 
-    private var _deletedRegisterRow:MutableLiveData<Int> = MutableLiveData()
-    val deletedRegisterRow:LiveData<Int> = _deletedRegisterRow
+    private var _deletedRegisterRow:SingleMutableLiveData<Int> = SingleMutableLiveData()
+    val deletedRegisterRow:SingleMutableLiveData<Int> = _deletedRegisterRow
 
     private var _registerId:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val registerId:SingleMutableLiveData<Long> = _registerId
