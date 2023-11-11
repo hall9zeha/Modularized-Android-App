@@ -14,8 +14,9 @@ import com.barryzea.modularizedapp.databinding.ItemLayoutBinding
 
 class MainViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
  private val bind=ItemLayoutBinding.bind(itemView)
- fun onBind(imageEntity: ImageEntity, onItemClick:(ImageEntity)->Unit) = with(bind){
+ fun onBind(imageEntity: ImageEntity, onItemClick:(ImageEntity)->Unit, onItemDelete:(ImageEntity)->Unit) = with(bind){
    tvDetail.text=imageEntity.description
+     btnDelete.setOnClickListener{onItemDelete(imageEntity)}
      root.setOnClickListener { onItemClick(imageEntity) }
  }
 }

@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bind:ActivityMainBinding
     private lateinit var adapter: MainAdapter
     private lateinit var staggeredGrid:StaggeredGridLayoutManager
+    private lateinit var entity: ImageEntity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.fetchAllRegisters()
         viewModel.allRegisters.observe(this){
             Log.e("TAG", it.toString() )
-            adapter.addAll(it)
+            adapter.addAll(it!!)
         }
         viewModel.registerId.observe(this){
             viewModel.getRegisterById(it!!)
@@ -40,10 +41,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.entity.observe(this){
             adapter.addItem(it!!)
         }
+        viewModel.deletedRegisterRow.observe(this){
+            adapter.removeItem(entity)
+        }
     }
     private fun setUpAdapter(){
         staggeredGrid = StaggeredGridLayoutManager(2,LinearLayout.VERTICAL)
-        adapter = MainAdapter(::onItemClick)
+        adapter = MainAdapter(::onItemClick,::onItemDelete)
         bind.rvMain.apply {
             setHasFixedSize(true)
             layoutManager=staggeredGrid
@@ -56,7 +60,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun onItemClick(entity:ImageEntity){
-
         NewRegisterDialog.newInstance(entity).show(supportFragmentManager.beginTransaction(),NewRegisterDialog::class.java.simpleName)
+    }
+    private fun onItemDelete(entity: ImageEntity){
+        this.entity=entity
+        viewModel.deleteRegister(entity.id)
     }
 }

@@ -20,8 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MainRepository): ScopedViewModel() {
-    private var _allRegisters:MutableLiveData<List<ImageEntity>> = MutableLiveData()
-    val allRegisters:LiveData<List<ImageEntity>> = _allRegisters
+    private var _allRegisters:SingleMutableLiveData<List<ImageEntity>> = SingleMutableLiveData()
+    val allRegisters:SingleMutableLiveData<List<ImageEntity>> = _allRegisters
 
     private var _entity:SingleMutableLiveData<ImageEntity> = SingleMutableLiveData()
     val entity:SingleMutableLiveData<ImageEntity> = _entity

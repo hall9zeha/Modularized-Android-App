@@ -30,6 +30,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBaseline_toBaselineOf="parent"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDelete"
+            android:src="@drawable/ic_delete"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBottomOf="parent"
+            android:layout_margin="8dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
