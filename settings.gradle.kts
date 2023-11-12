@@ -21,3 +21,4 @@ include(":core")
 include(":domain:models")
 include(":data")
 
+include(":test")

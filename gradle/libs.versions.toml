@@ -1,4 +1,10 @@
 [versions]
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+appcompat = "1.6.1"
+androidxTestRules = "1.5.0"
+androidxTestRunner = "1.5.2"
+androidxTestCore = "1.5.0"
 retrofit = "2.9.0"
 retrofitKotlinxSerializationJson = "1.0.0"
 room = "2.6.0"
@@ -8,18 +14,24 @@ library = "8.1.1"
 jvm = "1.9.0"
 core-ktx = "1.9.0"
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
-appcompat = "1.6.1"
+
 material = "1.10.0"
 hilt = "2.48.1"
 activity = "1.8.0"
 fragment = "1.6.2"
 parcelize = "1.8.10"
+kotlinxCoroutines = "1.7.3"
+robolectric = "4.10.3"
+roborazzi = "1.6.0"
 
 [libraries]
 activity-ktx = {group ="androidx.activity", name ="activity-ktx", version.ref = "activity"}
+androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 fragment-ktx = {group ="androidx.fragment", name ="fragment-ktx", version.ref = "fragment"}
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -33,6 +45,10 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+robolectric-shadows = { group = "org.robolectric", name = "shadows-framework", version.ref = "robolectric" }
+roborazzi = { group = "io.github.takahirom.roborazzi", name = "roborazzi", version.ref = "roborazzi" }
+
 
 [plugins]
 android = { id = "com.android.application", version.ref = "application" }
