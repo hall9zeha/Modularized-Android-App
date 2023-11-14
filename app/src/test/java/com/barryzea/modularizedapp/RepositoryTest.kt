@@ -48,7 +48,16 @@ class RepositoryTest {
        val idInserted = repository.saveRegister(newRegister)
        assertEquals(idInserted,newRegister.id)
    }
+    @Test
+    fun update_register() = runTest {
+        val newRegister = ImageEntity(1,"","test description")
+        repository.saveRegister(newRegister)
 
+        val updateRegister = ImageEntity(1,"","test update description")
+        val rowUpdated = repository.updateRegister(updateRegister)
+        assertEquals(rowUpdated,1)
+
+    }
 
     @Test
     fun addition_isCorrect() {
