@@ -26,8 +26,8 @@ dependencies{
     implementation(project(":domain:models"))
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
+    api(libs.room.runtime)
+    api(libs.room.ktx)
     kapt(libs.room.compiler)
     implementation(libs.activity.ktx)
 }

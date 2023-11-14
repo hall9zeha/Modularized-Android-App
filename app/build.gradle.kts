@@ -57,11 +57,13 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.activity.ktx)
     implementation(libs.fragment.ktx)
+    kaptTest("com.google.dagger:hilt-android-compiler:2.48.1")
+
     // Modules
     implementation(project(":domain"))
     implementation(project(":domain:models"))
     implementation(project(":data"))
-
+    implementation(project(":test"))
     //implementation(libs.libraries.retrofit-core)
 
 }
