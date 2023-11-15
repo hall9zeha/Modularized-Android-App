@@ -39,8 +39,8 @@ class RepositoryTest {
     @Before
     fun setup(){
         hiltRule.inject()
-    }
 
+    }
     @Test
     fun get_all_registers() = runTest {
         val newRegister = ImageEntity(1,"","test description")
@@ -78,8 +78,4 @@ class RepositoryTest {
         assertEquals(rowDeleted,1)
     }
 
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
 }
