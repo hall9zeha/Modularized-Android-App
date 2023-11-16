@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.barryzea.models.model.ImageEntity
 import com.barryzea.modularizedapp.databinding.ActivityMainBinding
@@ -53,6 +54,19 @@ class MainActivity : AppCompatActivity() {
             layoutManager=staggeredGrid
             adapter=this@MainActivity.adapter
         }
+        setupScrollList()
+    }
+    private fun setupScrollList(){
+        bind.rvMain.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy>0){
+                    if(bind.addFab.isShown)bind.addFab.hide()
+                }else if (dy<0){
+                    if(!bind.addFab.isShown)bind.addFab.show()
+                }
+            }
+        })
     }
     private fun setUpListeners(){
         bind.addFab.setOnClickListener {
