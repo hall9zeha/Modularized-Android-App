@@ -57,7 +57,10 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.activity.ktx)
     implementation(libs.fragment.ktx)
+    //Splash screen
+    implementation(libs.splash.screen)
     kaptTest("com.google.dagger:hilt-android-compiler:2.48.1")
+
 
     // Modules
     implementation(project(":domain"))

@@ -17,4 +17,9 @@
     <style name="MyDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/white</item>
     </style>
+    <style name="SplashScreenTheme" parent = "Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/surface</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/notepad_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.ModularizedApp</item>
+    </style>
 </resources>
