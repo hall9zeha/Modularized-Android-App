@@ -24,6 +24,7 @@ android{
 dependencies{
 
     implementation(project(":domain:models"))
+    implementation(project(":abstraction"))
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     api(libs.room.runtime)

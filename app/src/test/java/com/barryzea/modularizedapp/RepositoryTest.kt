@@ -1,7 +1,7 @@
 package com.barryzea.modularizedapp
 
 import com.barryzea.data.database.db.MyDatabase
-import com.barryzea.data.repository.MainRepository
+import com.barryzea.data.repository.MainRepositoryImpl
 import com.barryzea.models.model.ImageEntity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -31,7 +31,7 @@ class RepositoryTest {
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var repository: MainRepository
+    lateinit var repository: MainRepositoryImpl
 
     @Inject
     lateinit var myDatabase: MyDatabase

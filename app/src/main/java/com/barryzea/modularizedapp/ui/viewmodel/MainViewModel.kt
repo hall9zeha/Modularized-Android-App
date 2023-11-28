@@ -1,9 +1,7 @@
 package com.barryzea.modularizedapp.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.barryzea.data.repository.MainRepository
+import com.barryzea.data.repository.MainRepositoryImpl
+
 import com.barryzea.models.model.ImageEntity
 import com.barryzea.modularizedapp.ui.common.ScopedViewModel
 import com.barryzea.modularizedapp.ui.common.SingleMutableLiveData
@@ -19,7 +17,7 @@ import javax.inject.Inject
  **/
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: MainRepository): ScopedViewModel() {
+class MainViewModel @Inject constructor(private val repository: MainRepositoryImpl): ScopedViewModel() {
     private var _allRegisters:SingleMutableLiveData<List<ImageEntity>> = SingleMutableLiveData()
     val allRegisters:SingleMutableLiveData<List<ImageEntity>> = _allRegisters
 

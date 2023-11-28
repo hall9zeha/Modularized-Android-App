@@ -22,3 +22,4 @@ include(":domain:models")
 include(":data")
 
 include(":test")
+include(":abstraction")

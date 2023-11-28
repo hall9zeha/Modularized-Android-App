@@ -66,6 +66,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":domain:models"))
     implementation(project(":data"))
+    implementation(project(":abstraction"))
     implementation(project(":test"))
     //implementation(libs.libraries.retrofit-core)
 
