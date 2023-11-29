@@ -63,6 +63,7 @@ dependencies {
 
 
     // Modules
+    implementation(project(":core"))
     implementation(project(":domain"))
     implementation(project(":domain:models"))
     implementation(project(":data"))

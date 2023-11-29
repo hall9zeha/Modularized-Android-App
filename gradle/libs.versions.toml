@@ -23,6 +23,7 @@ robolectric = "4.10.3"
 roborazzi = "1.6.0"
 room = "2.6.0"
 splash="1.0.1"
+viewmodel-version = "2.6.1"
 
 
 [libraries]
@@ -44,12 +45,14 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+livedata = {group = "androidx.lifecycle", name = "lifecycle-livedata-core", version.ref = "viewmodel-version"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 robolectric-shadows = { group = "org.robolectric", name = "shadows-framework", version.ref = "robolectric" }
 roborazzi = { group = "io.github.takahirom.roborazzi", name = "roborazzi", version.ref = "roborazzi" }
 splash-screen = {group = "androidx.core", name = "core-splashscreen", version.ref = "splash"}
+viewmodel = {group = "androidx.lifecycle", name = "lifecycle-viewmodel",version.ref = "viewmodel-version"}
 
 [plugins]
 android = { id = "com.android.application", version.ref = "application" }

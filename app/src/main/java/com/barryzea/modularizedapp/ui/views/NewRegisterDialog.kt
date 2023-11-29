@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * Created by Barry Zea H. on 10/11/23.
  * Copyright (c)  All rights reserved.
  **/
-private const val ARG_PARAM1 = "param1"
+
 @AndroidEntryPoint
 class NewRegisterDialog: DialogFragment(){
     private var entity:ImageEntity?=null
@@ -31,17 +31,18 @@ class NewRegisterDialog: DialogFragment(){
     private var isNewRegister:Boolean = true
 
     private val bind:DetailScreenDialogBinding get() = _bind!!
+    //Para que la instancia del view model sea la misma que en la actividad principal
+    //y así usar los mismos observadores
     private val viewModel:MainViewModel by viewModels(ownerProducer = {requireActivity()})
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.myFullScreenDialog)
+        setStyle(STYLE_NORMAL, R.style.myFullScreenDialog)
 
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return object:Dialog(requireActivity(),theme){
             override fun onBackPressed() {
-
               maintenanceRegister()
             }
         }

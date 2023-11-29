@@ -1,9 +1,25 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    alias(libs.plugins.library)
+    alias(libs.plugins.kotlinAndroid)
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+android{
+    namespace = "com.barryzea.core"
+    compileSdk = 34
+    defaultConfig {
+        minSdk = 24
+
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+dependencies{
+    implementation(libs.viewmodel)
+    implementation(libs.livedata)
 }
