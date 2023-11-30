@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.barryzea.models.model.ImageEntity
+import com.barryzea.models.model.Note
 
 
 /**
@@ -18,17 +18,17 @@ import com.barryzea.models.model.ImageEntity
 interface MyDao {
     @Transaction
     @Insert
-    suspend fun saveRegister(entity:ImageEntity):Long
+    suspend fun saveRegister(entity:Note):Long
     @Transaction
     @Update
-    suspend fun updateRegister(entity: ImageEntity):Int
+    suspend fun updateRegister(entity: Note):Int
     @Transaction
-    @Query("delete from ImageEntity where id=:id")
+    @Query("delete from Note where idNote=:id")
     suspend fun deleteRegister(id:Long):Int
-    @Query("select * from ImageEntity")
-    suspend fun getAllRegisters():List<ImageEntity>
+    @Query("select * from Note")
+    suspend fun getAllRegisters():List<Note>
 
-    @Query("select * from ImageEntity where id=:id")
-    suspend fun getRegisterById(id:Long):ImageEntity
+    @Query("select * from Note where idNote=:id")
+    suspend fun getRegisterById(id:Long):Note
 
 }

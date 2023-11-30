@@ -2,7 +2,7 @@ package com.barryzea.modularizedapp.ui.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.barryzea.models.model.ImageEntity
+import com.barryzea.models.model.Note
 import com.barryzea.modularizedapp.databinding.ItemLayoutBinding
 
 
@@ -14,7 +14,7 @@ import com.barryzea.modularizedapp.databinding.ItemLayoutBinding
 
 class MainViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
  private val bind=ItemLayoutBinding.bind(itemView)
- fun onBind(imageEntity: ImageEntity, onItemClick:(ImageEntity)->Unit, onItemDelete:(ImageEntity)->Unit) = with(bind){
+ fun onBind(imageEntity: Note, onItemClick:(Note)->Unit, onItemDelete:(Note)->Unit) = with(bind){
    tvDetail.text=imageEntity.description
      btnDelete.setOnClickListener{onItemDelete(imageEntity)}
      root.setOnClickListener { onItemClick(imageEntity) }

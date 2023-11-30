@@ -3,7 +3,7 @@ package com.barryzea.data.database.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.barryzea.data.database.dao.MyDao
-import com.barryzea.models.model.ImageEntity
+import com.barryzea.models.model.Note
 
 
 /**
@@ -12,7 +12,7 @@ import com.barryzea.models.model.ImageEntity
  * Copyright (c)  All rights reserved.
  **/
 
-@Database(entities = [ImageEntity::class], version = 1, exportSchema = false)
+@Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class MyDatabase:RoomDatabase() {
  abstract fun getDao(): MyDao
 }

@@ -44,6 +44,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation(project(":core"))
     implementation (libs.retrofit.core)
     implementation (libs.retrofit.kotlin.serialization)
     implementation(libs.room.runtime)

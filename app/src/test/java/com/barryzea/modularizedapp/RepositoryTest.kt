@@ -2,7 +2,7 @@ package com.barryzea.modularizedapp
 
 import com.barryzea.data.database.db.MyDatabase
 import com.barryzea.data.repository.MainRepositoryImpl
-import com.barryzea.models.model.ImageEntity
+import com.barryzea.models.model.Note
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
@@ -43,7 +43,7 @@ class RepositoryTest {
     }
     @Test
     fun get_all_registers() = runTest {
-        val newRegister = ImageEntity(1,"","test description")
+        val newRegister = Note(1,"","test description")
 
         repository.saveRegister(newRegister)
 
@@ -53,16 +53,16 @@ class RepositoryTest {
     }
    @Test
    fun save_register()= runTest{
-       val newRegister = ImageEntity(1,"","test description")
+       val newRegister = Note(1,"","test description")
        val idInserted = repository.saveRegister(newRegister)
-       assertEquals(idInserted,newRegister.id)
+       assertEquals(idInserted,newRegister.idNote)
    }
     @Test
     fun update_register() = runTest {
-        val newRegister = ImageEntity(1,"","test description")
+        val newRegister = Note(1,"","test description")
         repository.saveRegister(newRegister)
 
-        val updateRegister = ImageEntity(1,"","test update description")
+        val updateRegister = Note(1,"","test update description")
         val rowUpdated = repository.updateRegister(updateRegister)
         assertEquals(rowUpdated,1)
 
@@ -70,10 +70,10 @@ class RepositoryTest {
     @Test
     fun delete_register() = runTest{
 
-        val otherRegister = ImageEntity(2,"","test for delete description")
+        val otherRegister = Note(2,"","test for delete description")
         repository.saveRegister(otherRegister)
 
-        val rowDeleted = repository.deleteRegister(otherRegister.id)
+        val rowDeleted = repository.deleteRegister(otherRegister.idNote)
 
         assertEquals(rowDeleted,1)
     }

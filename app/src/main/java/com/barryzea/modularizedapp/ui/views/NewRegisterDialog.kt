@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.barryzea.models.model.ImageEntity
+import com.barryzea.models.model.Note
 import com.barryzea.modularizedapp.R
 import com.barryzea.modularizedapp.databinding.DetailScreenDialogBinding
 import com.barryzea.modularizedapp.ui.common.EXTRA_KEY
@@ -26,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewRegisterDialog: DialogFragment(){
-    private var entity:ImageEntity?=null
+    private var entity:Note?=null
     private var _bind:DetailScreenDialogBinding?=null
     private var isNewRegister:Boolean = true
     private val bind:DetailScreenDialogBinding get() = _bind!!
@@ -78,7 +77,7 @@ class NewRegisterDialog: DialogFragment(){
             isNewRegister=false
         }
     }
-    private fun setUpDetail(entity: ImageEntity){
+    private fun setUpDetail(entity: Note){
         bind.tvContent.setText(entity.description)
     }
     private fun setUpObservers(){
@@ -87,30 +86,30 @@ class NewRegisterDialog: DialogFragment(){
             dismiss()
         }
         viewModel.updatedRegisterRow.observe(this){
-            viewModel.setRegisterId(entity!!.id)
+            viewModel.setRegisterId(entity!!.idNote)
             dismiss()
         }
     }
     private fun maintenanceRegister(){
         if(isNewRegister) {
-            val entity = ImageEntity(description = bind.tvContent.text.toString())
+            val entity = Note(description = bind.tvContent.text.toString())
             saveRegister(entity)}
         else{
-            val updateEntity= ImageEntity(id= entity!!.id,
+            val updateEntity= Note(idNote= entity!!.idNote,
                 description = bind.tvContent.text.toString(),
                 url = entity!!.url)
             updateRegister(updateEntity)
         }
     }
-    private fun saveRegister(entity:ImageEntity){
+    private fun saveRegister(entity:Note){
         viewModel.saveRegister(entity)
     }
-    private fun updateRegister(entity: ImageEntity){
+    private fun updateRegister(entity: Note){
         viewModel.updateRegister(entity)
     }
     companion object{
         @JvmStatic
-        fun newInstance(param1:ImageEntity)=NewRegisterDialog().apply {
+        fun newInstance(param1:Note)=NewRegisterDialog().apply {
             arguments = Bundle().apply {
                 putParcelable(EXTRA_KEY, param1)
             }

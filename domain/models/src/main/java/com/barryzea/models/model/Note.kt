@@ -1,6 +1,7 @@
 package com.barryzea.models.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
@@ -14,23 +15,24 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity
-data class ImageEntity(
+data class Note(
  @PrimaryKey(autoGenerate = true)
- val id:Long=0,
+ @ColumnInfo(index = true)
+ val idNote:Long=0,
  val url:String="",
  val description:String=""):Parcelable {
  override fun equals(other: Any?): Boolean {
   if (this === other) return true
   if (javaClass != other?.javaClass) return false
 
-  other as ImageEntity
+  other as Note
 
-  if (id != other.id) return false
+  if (idNote != other.idNote) return false
 
   return true
  }
 
  override fun hashCode(): Int {
-  return id.hashCode()
+  return idNote.hashCode()
  }
 }

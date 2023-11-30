@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.barryzea.models.model.ImageEntity
+import com.barryzea.models.model.Note
 import com.barryzea.modularizedapp.databinding.ActivityMainBinding
 import com.barryzea.modularizedapp.ui.adapter.MainAdapter
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bind:ActivityMainBinding
     private lateinit var adapter: MainAdapter
     private lateinit var staggeredGrid:StaggeredGridLayoutManager
-    private lateinit var entity: ImageEntity
+    private lateinit var entity: Note
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,11 +86,11 @@ class MainActivity : AppCompatActivity() {
             NewRegisterDialog().show(supportFragmentManager.beginTransaction(),NewRegisterDialog::class.java.simpleName)
         }
     }
-    private fun onItemClick(entity:ImageEntity){
+    private fun onItemClick(entity:Note){
         NewRegisterDialog.newInstance(entity).show(supportFragmentManager.beginTransaction(),NewRegisterDialog::class.java.simpleName)
     }
-    private fun onItemDelete(entity: ImageEntity){
+    private fun onItemDelete(entity: Note){
         this.entity=entity
-        viewModel.deleteRegister(entity.id)
+        viewModel.deleteRegister(entity.idNote)
     }
 }
