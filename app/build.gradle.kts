@@ -61,14 +61,14 @@ dependencies {
     implementation(libs.splash.screen)
     kaptTest("com.google.dagger:hilt-android-compiler:2.48.1")
 
-
     // Modules
     implementation(project(":core"))
     implementation(project(":domain"))
     implementation(project(":domain:models"))
     implementation(project(":data"))
     implementation(project(":abstraction"))
+    implementation(project(":feature"))
     implementation(project(":test"))
-    //implementation(libs.libraries.retrofit-core)
+
 
 }

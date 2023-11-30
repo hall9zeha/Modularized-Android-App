@@ -23,3 +23,4 @@ include(":data")
 
 include(":test")
 include(":abstraction")
+include(":feature")
