@@ -19,7 +19,6 @@
                 android:insetLeft="0dp"
                 android:insetRight="0dp"
                 android:insetTop="0dp"
-
                 app:icon="@drawable/ic_back"
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>-->
         </androidx.appcompat.widget.Toolbar>
@@ -36,6 +35,7 @@
             android:id="@+id/tvContent"
             android:padding="8dp"
             android:background="@android:color/transparent"
+            android:hint="Escribe tus notas aquí"
             tools:text="prueba de texto "
             android:gravity="start"
             android:singleLine="false"/>

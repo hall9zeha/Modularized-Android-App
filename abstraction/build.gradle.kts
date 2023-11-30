@@ -6,7 +6,9 @@ plugins {
 android{
     namespace = "com.barryzea.data"
     compileSdk = 34
-
+    defaultConfig {
+        minSdk = 24
+    }
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -15,7 +17,6 @@ android{
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
 dependencies{
     implementation(project(":domain:models"))
 }

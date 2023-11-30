@@ -29,7 +29,6 @@ class NewRegisterDialog: DialogFragment(){
     private var entity:ImageEntity?=null
     private var _bind:DetailScreenDialogBinding?=null
     private var isNewRegister:Boolean = true
-
     private val bind:DetailScreenDialogBinding get() = _bind!!
     //Para que la instancia del view model sea la misma que en la actividad principal
     //y así usar los mismos observadores
@@ -37,9 +36,7 @@ class NewRegisterDialog: DialogFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.myFullScreenDialog)
-
     }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return object:Dialog(requireActivity(),theme){
             override fun onBackPressed() {
@@ -55,11 +52,11 @@ class NewRegisterDialog: DialogFragment(){
         activity?.let{
             _bind= DetailScreenDialogBinding.inflate(inflater,container,false)
             _bind?.let{ b->
-                b.toolbarDetail.setNavigationIcon(R.drawable.ic_back)
+                b.toolbarDetail.setNavigationIcon(R.drawable.left_arrow)
                 b.toolbarDetail.setNavigationOnClickListener {
                    maintenanceRegister()
                 }
-                b.toolbarDetail.title = "Nuevo registro"
+                b.toolbarDetail.title = "Nueva nota"
                 getIntentExtras()
                 setUpObservers()
                 return b.root
