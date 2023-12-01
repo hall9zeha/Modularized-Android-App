@@ -1,6 +1,7 @@
 [versions]
 activity = "1.8.0"
 androidx-test-ext-junit = "1.1.5"
+constraintlayout = "2.1.4"
 espresso-core = "3.5.1"
 appcompat = "1.6.1"
 androidxTestRules = "1.5.0"
@@ -8,6 +9,7 @@ androidxTestRunner = "1.5.2"
 androidxTestCore = "1.5.0"
 application = "8.1.1"
 core-ktx = "1.9.0"
+constraint-layout-version = "2.1.4"
 fragment = "1.6.2"
 hilt = "2.48.1"
 jvm = "1.9.0"
@@ -15,7 +17,7 @@ junit = "4.13.2"
 kotlinxCoroutines = "1.7.3"
 kotlin = "1.9.0"
 library = "8.1.1"
-material = "1.10.0"
+material-version = "1.10.0"
 parcelize = "1.8.10"
 retrofit = "2.9.0"
 retrofitKotlinxSerializationJson = "1.0.0"
@@ -31,6 +33,8 @@ activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
+androidx-constraintlayout = {group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraint-layout-version"}
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
@@ -44,7 +48,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material-version" }
 livedata = {group = "androidx.lifecycle", name = "lifecycle-livedata-core", version.ref = "viewmodel-version"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }

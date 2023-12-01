@@ -10,7 +10,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.barryzea.models.model.Note
-import com.barryzea.modularizedapp.R
+import com.barryzea.core.R
+
 import com.barryzea.modularizedapp.databinding.DetailScreenDialogBinding
 import com.barryzea.modularizedapp.ui.common.EXTRA_KEY
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel

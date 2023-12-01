@@ -20,6 +20,11 @@ android{
     }
 }
 dependencies{
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
     implementation(libs.viewmodel)
     implementation(libs.livedata)
+    //Splash screen
+    implementation(libs.splash.screen)
 }
