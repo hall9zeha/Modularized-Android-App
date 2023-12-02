@@ -59,4 +59,8 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
         _registerId.value = id
     }
 
+    override fun onCleared() {
+        destroyScope()
+        super.onCleared()
+    }
 }
