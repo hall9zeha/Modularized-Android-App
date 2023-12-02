@@ -1,11 +1,13 @@
 package com.barryzea.data.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.Tag
 
 
 /**
@@ -30,5 +32,24 @@ interface MyDao {
 
     @Query("select * from Note where idNote=:id")
     suspend fun getRegisterById(id:Long):Note
+
+    //For Tags
+    @Transaction
+    @Insert
+    suspend fun saveTag(tag:Tag):Long
+    @Transaction
+    @Update
+    suspend fun updateTag(tag:Tag):Int
+    @Transaction
+    @Delete
+    suspend fun deleteTag(tag:Tag):Int
+    @Transaction
+    @Query("select * from tag")
+    suspend fun getAllTag():List<Tag>
+
+    @Transaction
+    @Query("select * from Tag where idTag=:id")
+    suspend fun getTagById(id:Long):Tag
+
 
 }

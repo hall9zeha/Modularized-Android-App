@@ -1,6 +1,7 @@
 package com.barryzea.abstraction
 
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.Tag
 
 
 /****
@@ -16,4 +17,6 @@ interface MainRepository {
     suspend fun deleteRegister(idEntity:Long):Int
     suspend fun getAllRegisters():List<Note>
     suspend fun getRegisterById(id:Long):Note
+
+
 }

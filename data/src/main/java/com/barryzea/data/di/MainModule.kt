@@ -3,8 +3,10 @@ package com.barryzea.data.di
 import android.app.Application
 import androidx.room.Room
 import com.barryzea.abstraction.MainRepository
+import com.barryzea.abstraction.TagRepository
 import com.barryzea.data.database.db.MyDatabase
 import com.barryzea.data.repository.MainRepositoryImpl
+import com.barryzea.data.repository.TagRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -38,5 +40,7 @@ class MainModule{
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule{
     @Binds
-    abstract  fun repositoryProvides(repository: MainRepositoryImpl): MainRepository
+    abstract  fun noteRepositoryProvides(repository: MainRepositoryImpl): MainRepository
+    @Binds
+    abstract fun  tagRepositoryProvides(tagRepository: TagRepositoryImpl):TagRepository
 }
