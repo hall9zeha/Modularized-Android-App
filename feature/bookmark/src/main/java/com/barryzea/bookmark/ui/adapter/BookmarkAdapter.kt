@@ -31,13 +31,14 @@ class BookmarkAdapter:RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
 
     override fun getItemCount()= bookmarks.size
     fun addAll(bookmarkList:List<Tag>){
-        bookmarkList.forEach{
-            if(!bookmarks.contains(it)){
-                bookmarks.add(it)
-                notifyItemInserted(bookmarks.size - 1)
-            }else{
-                update(it)
-            }
+        bookmarkList.forEach{add(it) }
+    }
+    fun add(bookmark:Tag){
+        if(!bookmarks.contains(bookmark)){
+            bookmarks.add(bookmark)
+            notifyItemInserted(bookmarks.size - 1)
+        }else{
+            update(bookmark)
         }
     }
     private fun update(bookmark:Tag){

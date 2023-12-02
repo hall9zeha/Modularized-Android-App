@@ -8,6 +8,7 @@
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:orientation="vertical"
        android:id="@+id/rvBookmark"
        tools:listitem="@layout/item_bookmark"
        android:layout_margin="4dp"/>

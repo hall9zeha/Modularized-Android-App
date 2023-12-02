@@ -5,22 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.bookmark.databinding.FragmentBookmarkBinding
+import com.barryzea.bookmark.ui.adapter.BookmarkAdapter
+import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BookmarkFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 class BookmarkFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
     private var _bind: FragmentBookmarkBinding? = null
+    private val  viewModel:BookmarkViewModel by viewModels()
     private val bind: FragmentBookmarkBinding get() = _bind!!
+    private lateinit var bookmarkAdapter:BookmarkAdapter
+    private val layoutManager by lazy { LinearLayoutManager(context,RecyclerView.VERTICAL, false) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +48,29 @@ class BookmarkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpAdapter()
+        setUpObservers()
+    }
+    private fun setUpObservers(){
+        viewModel.bookmarks.observe(viewLifecycleOwner){
+            it?.let {bookmarks->
+                bookmarkAdapter.addAll(bookmarks)
+            }
+        }
+        viewModel.tagRowDeleted.observe(viewLifecycleOwner){
 
+        }
+    }
+    private fun setUpAdapter(){
+        bookmarkAdapter = BookmarkAdapter()
+        bind.rvBookmark.apply {
+            layoutManager = this@BookmarkFragment.layoutManager
+            setHasFixedSize(true)
+            adapter= bookmarkAdapter
+        }
     }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BookmarkFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             BookmarkFragment().apply {
