@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
 }
 android{
-    namespace = "com.barryzea.data"
+    namespace = "com.barryzea.abstraction"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

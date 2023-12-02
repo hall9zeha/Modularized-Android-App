@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.library)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
 
 }
 
@@ -31,15 +32,27 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.activity.ktx)
+    implementation(libs.fragment.ktx)
+
     //
     implementation(project(":core"))
+    implementation(project(":data"))
+    implementation(project(":domain:models"))
 }
