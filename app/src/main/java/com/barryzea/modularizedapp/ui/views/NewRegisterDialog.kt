@@ -31,8 +31,9 @@ class NewRegisterDialog: DialogFragment(){
     private var isNewRegister:Boolean = true
     private val bind:DetailScreenDialogBinding get() = _bind!!
     //Para que la instancia del view model sea la misma que en la actividad principal
-    //y así usar los mismos observadores
-    private val viewModel:MainViewModel by viewModels(ownerProducer = {requireActivity()})
+    //y así usar los mismos observadores usamos (ownerProducers = {requireActivity})
+    //Si el dialogFragment es lanzado desde un Fragment usamos  (ownerProducers = {requireParentFragment})
+    private val viewModel:MainViewModel by viewModels(ownerProducer = {requireParentFragment()})
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.myFullScreenDialog)
