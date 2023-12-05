@@ -26,6 +26,7 @@ robolectric = "4.10.3"
 roborazzi = "1.6.0"
 room = "2.6.0"
 splash="1.0.1"
+safe-args-version ="2.5.0"
 viewmodel-version = "2.6.1"
 
 
@@ -70,4 +71,5 @@ jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "parcelize" }
+safe-args = {id ="androidx.navigation.safeargs",version.ref ="safe-args-version"}
 

@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.library)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.safe.args)
 }
 
 android {

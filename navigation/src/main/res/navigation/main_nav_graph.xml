@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/home_flow"
+    >
+    <include app:graph ="@navigation/home_flow"/>
+    <include app:graph ="@navigation/bookmark_flow"/>
+
+    <action
+        android:id="@+id/action_home_flow"
+        app:destination="@id/home_flow"
+        app:popUpTo="@id/main_nav_graph"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"/>
+
+    <action
+        android:id="@+id/action_bookmark_flow"
+        app:popUpTo="@id/main_nav_graph"
+        app:destination="@id/bookmark_flow"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"/>
+</navigation>

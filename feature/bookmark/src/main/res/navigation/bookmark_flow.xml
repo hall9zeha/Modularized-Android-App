@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bookmark_flow">
+    android:id="@+id/bookmark_flow"
+    app:startDestination="@id/bookmarkFragment">
+
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="com.barryzea.bookmark.ui.BookmarkFragment"/>
 
 </navigation>
