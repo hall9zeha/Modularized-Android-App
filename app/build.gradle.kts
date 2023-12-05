@@ -68,6 +68,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":abstraction"))
     implementation(project(":feature"))
+    implementation(project(":navigation"))
     implementation(project(":test"))
 
 

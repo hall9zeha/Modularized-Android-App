@@ -56,4 +56,5 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":abstraction"))
     implementation(project(":domain:models"))
+    implementation(project(":navigation"))
 }
