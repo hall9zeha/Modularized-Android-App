@@ -12,9 +12,9 @@ import androidx.navigation.NavController
 class Navigator{
     lateinit var navController:NavController
 
-    fun navigateToFlow(navigationFlow: NavigationFlow) = when(navigationFlow){
+    /*fun navigateToFlow(navigationFlow: NavigationFlow) = when(navigationFlow){
         //MainNavGraphDirections requiere el plugin de safe-args para navigation
         NavigationFlow.HomeFlow ->navController.navigate(MainNavGraphDirections.actionHomeFlow())
         NavigationFlow.BookmarkFlow -> navController.navigate(MainNavGraphDirections.actionBookmarkFlow())
-    }
+    }*/
 }

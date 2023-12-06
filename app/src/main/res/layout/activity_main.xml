@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.google.android.material.appbar.MaterialToolbar
+
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:id="@+id/toolbarMain"
@@ -17,15 +18,27 @@
         app:navigationIcon="@drawable/ic_dehace"
         />
 <androidx.drawerlayout.widget.DrawerLayout
-
     android:id="@+id/mainDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?android:attr/actionBarSize"
+    tools:context=".ui.views.MainActivity"
+   android:layout_marginTop="?android:attr/actionBarSize"
+    >
 
-    tools:context=".ui.views.MainActivity">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
 
 
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_nav_graph"/>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -34,13 +47,6 @@
         app:menu="@menu/navigation_menu"
         />
 
-    <fragment
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/main_nav_graph"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -27,4 +27,5 @@ dependencies{
     implementation(libs.livedata)
     //Splash screen
     implementation(libs.splash.screen)
+    implementation(project(":navigation"))
 }

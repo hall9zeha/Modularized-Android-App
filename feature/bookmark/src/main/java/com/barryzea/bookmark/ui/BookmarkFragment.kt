@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.bookmark.databinding.FragmentBookmarkBinding
 import com.barryzea.bookmark.ui.adapter.BookmarkAdapter
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
 class BookmarkFragment : Fragment() {
 
     private var param1: String? = null
