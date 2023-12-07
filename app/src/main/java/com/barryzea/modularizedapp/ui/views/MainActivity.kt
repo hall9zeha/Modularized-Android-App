@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
 
         setUpToolbar()
         setUpNavigator()
+        onBackPressedDispatcher()
 
     }
     private fun setUpToolbar(){
@@ -78,11 +80,16 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
     override fun navigateToFlow(flow: NavigationFlow) {
        // navigator.navigateToFlow(flow)
     }
-    override fun onBackPressed() {
-        if (bind.mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            bind.mainDrawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
+    private fun onBackPressedDispatcher(){
+        onBackPressedDispatcher.addCallback(this,object :OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                if (bind.mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    bind.mainDrawerLayout.closeDrawer(GravityCompat.START)
+                } else {
+                    finish()
+                }
+            }
+        })
     }
+
 }
