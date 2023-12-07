@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainDrawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.views.MainActivity"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    >
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,28 +28,17 @@
         app:navigationIconTint="@color/white"
         app:navigationIcon="@drawable/ic_dehace"
         />
-<androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/mainDrawerLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.views.MainActivity"
-   android:layout_marginTop="?android:attr/actionBarSize"
-    >
-
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    />
-
 
     <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_marginTop="?android:attr/actionBarSize"
         app:defaultNavHost="true"
         app:navGraph="@navigation/main_nav_graph"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -46,7 +46,4 @@
         android:layout_gravity="start"
         app:menu="@menu/navigation_menu"
         />
-
-
 </androidx.drawerlayout.widget.DrawerLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>

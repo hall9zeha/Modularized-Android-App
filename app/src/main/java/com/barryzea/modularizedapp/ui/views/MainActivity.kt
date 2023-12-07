@@ -66,7 +66,14 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, bind.mainDrawerLayout)
+        val drawerLayout = bind.mainDrawerLayout
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        return true
     }
     override fun navigateToFlow(flow: NavigationFlow) {
        // navigator.navigateToFlow(flow)
