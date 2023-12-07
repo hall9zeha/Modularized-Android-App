@@ -54,11 +54,11 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         setUpToolbar()
         setUpNavigator()
         onBackPressedDispatcher()
+        changeActionbarTitle()
 
-    }
+        }
     private fun setUpToolbar(){
         setSupportActionBar(bind.toolbarMain)
-        supportActionBar!!.title = "Modularized App"
 
     }
     private fun setUpNavigator(){
@@ -66,7 +66,14 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         bind.navView.setupWithNavController(navController)
         NavigationUI.setupWithNavController(bind.navView,navController)
     }
-
+    private fun changeActionbarTitle(){
+        navController.addOnDestinationChangedListener{_, destination,_ ->
+            when(destination.id){
+               R.id.homeFragment -> supportActionBar?.title= "Home"
+                com.barryzea.bookmark.R.id.bookmarkFragment->supportActionBar?.title = "Bookmarks"
+            }
+        }
+    }
     override fun onSupportNavigateUp(): Boolean {
         val drawerLayout = bind.mainDrawerLayout
 
@@ -77,6 +84,7 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         }
         return true
     }
+
     override fun navigateToFlow(flow: NavigationFlow) {
        // navigator.navigateToFlow(flow)
     }
@@ -86,7 +94,14 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
                 if (bind.mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                     bind.mainDrawerLayout.closeDrawer(GravityCompat.START)
                 } else {
-                    finish()
+                    val currentDestinationId = navController.currentDestination?.id
+                    // Si estamos en el fragmento inicial (HomeFragment), salimos de la actividad
+                    if (currentDestinationId == R.id.homeFragment) {
+                        finish()
+                    } else {
+                        // Si estamos en otro fragmento, navegamos hacia atrás
+                        navController.navigateUp()
+                    }
                 }
             }
         })

@@ -11,9 +11,6 @@
     tools:openDrawer="start"
     >
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.google.android.material.appbar.MaterialToolbar
@@ -45,5 +42,6 @@
         android:id="@+id/navView"
         android:layout_gravity="start"
         app:menu="@menu/navigation_menu"
+        app:headerLayout="@layout/header_view"
         />
 </androidx.drawerlayout.widget.DrawerLayout>
