@@ -4,11 +4,17 @@ import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import com.barryzea.models.model.Note
 import com.barryzea.core.R
 
@@ -37,9 +43,10 @@ class NewRegisterDialog: DialogFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.myFullScreenDialog)
+
     }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return object:Dialog(requireActivity(),theme){
+         return object:Dialog(requireActivity(),theme){
             override fun onBackPressed() {
               maintenanceRegister()
             }
@@ -57,12 +64,21 @@ class NewRegisterDialog: DialogFragment(){
                 b.toolbarDetail.setNavigationOnClickListener {
                    maintenanceRegister()
                 }
+
                 b.toolbarDetail.title = "Nueva nota"
-                getIntentExtras()
-                setUpObservers()
                 return b.root
             }
         }
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setUpMenuProvider()
+        getIntentExtras()
+        setUpObservers()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requireActivity().onBackPressedDispatcher.addCallback(this, object :OnBackPressedCallback(true){
                 override fun handleOnBackPressed() {
@@ -70,8 +86,25 @@ class NewRegisterDialog: DialogFragment(){
                 }
             })
         }
-        return super.onCreateView(inflater, container, savedInstanceState)
     }
+   private fun setUpMenuProvider(){
+       bind.toolbarDetail.inflateMenu(R.menu.note_menu)
+       bind.toolbarDetail.setOnMenuItemClickListener {
+           true
+       }
+       //No infla el menú en el toolbar del dialog fragment
+      /* val menuHost:MenuHost = requireActivity()
+       menuHost.addMenuProvider(object:MenuProvider{
+           override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+               menuInflater.inflate(R.menu.note_menu,menu)
+           }
+
+           override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+               return true
+           }
+
+       },viewLifecycleOwner, Lifecycle.State.RESUMED)*/
+   }
     private fun getIntentExtras(){
        arguments?.let {
             entity = it.getParcelable(EXTRA_KEY)!!
@@ -104,7 +137,7 @@ class NewRegisterDialog: DialogFragment(){
         }
     }
     private fun saveRegister(entity:Note){
-        viewModel.saveRegister(entity)
+        if(bind.tvContent.text.isNotEmpty())viewModel.saveRegister(entity) else dismiss()
     }
     private fun updateRegister(entity: Note){
         viewModel.updateRegister(entity)
