@@ -60,6 +60,8 @@ dependencies {
     //Splash screen
     implementation(libs.splash.screen)
     kaptTest(libs.hilt.compiler)
+    //Color picker
+    implementation(libs.color.picker)
 
     // Modules
     implementation(project(":core"))

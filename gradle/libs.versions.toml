@@ -28,7 +28,7 @@ room = "2.6.0"
 splash="1.0.1"
 safe-args-version ="2.5.0"
 viewmodel-version = "2.6.1"
-
+color-picker-version = "2.3.0"
 
 [libraries]
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
@@ -62,6 +62,9 @@ robolectric-shadows = { group = "org.robolectric", name = "shadows-framework", v
 roborazzi = { group = "io.github.takahirom.roborazzi", name = "roborazzi", version.ref = "roborazzi" }
 splash-screen = {group = "androidx.core", name = "core-splashscreen", version.ref = "splash"}
 viewmodel = {group = "androidx.lifecycle", name = "lifecycle-viewmodel",version.ref = "viewmodel-version"}
+
+#Color picker catalog
+color-picker = {group = "com.github.skydoves", name = "colorpickerview", version.ref = "color-picker-version"}
 
 [plugins]
 android = { id = "com.android.application", version.ref = "application" }
