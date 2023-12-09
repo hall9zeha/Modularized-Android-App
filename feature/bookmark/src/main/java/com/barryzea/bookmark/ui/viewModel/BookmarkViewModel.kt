@@ -27,6 +27,8 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
     private var _tagRowDeleted:SingleMutableLiveData<Int>  = SingleMutableLiveData()
     val tagRowDeleted:SingleMutableLiveData<Int> get() = _tagRowDeleted
 
+    private var _colorSelected:SingleMutableLiveData<String> = SingleMutableLiveData()
+    val colorSelected:SingleMutableLiveData<String> get() = _colorSelected
     init{
         initScope()
     }
@@ -41,6 +43,9 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
     }
     fun deleteTag(tag:Tag){
         launch{_tagRowDeleted.postValue(repository.deleteTag(tag))}
+    }
+    fun setColorSelected(colorHex:String){
+        launch { _colorSelected.value= colorHex}
     }
     override fun onCleared() {
         destroyScope()

@@ -64,7 +64,6 @@ class NewRegisterDialog: DialogFragment(){
                 b.toolbarDetail.setNavigationOnClickListener {
                    maintenanceRegister()
                 }
-
                 b.toolbarDetail.title = "Nueva nota"
                 return b.root
             }

@@ -51,8 +51,15 @@ class BookmarkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpListeners()
         setUpAdapter()
         setUpObservers()
+
+    }
+    private fun setUpListeners(){
+        bind.fabBookmark.setOnClickListener {
+            AddBookmarkDialog().show(childFragmentManager.beginTransaction(),AddBookmarkDialog::class.simpleName)
+        }
     }
     private fun setUpObservers(){
         viewModel.bookmarks.observe(viewLifecycleOwner){
