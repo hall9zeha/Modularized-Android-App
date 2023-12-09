@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/bookmarkFragment"
-        android:name="com.barryzea.bookmark.ui.BookmarkFragment"/>
+        android:name="com.barryzea.bookmark.ui.view.BookmarkFragment"/>
 
 </navigation>

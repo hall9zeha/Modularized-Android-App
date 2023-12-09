@@ -1,4 +1,4 @@
-package com.barryzea.bookmark.ui
+package com.barryzea.bookmark.ui.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.bookmark.databinding.FragmentBookmarkBinding
+
 import com.barryzea.bookmark.ui.adapter.BookmarkAdapter
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import dagger.hilt.android.AndroidEntryPoint

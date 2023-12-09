@@ -51,6 +51,9 @@ dependencies {
     implementation(libs.activity.ktx)
     implementation(libs.fragment.ktx)
 
+    //Color picker
+    implementation(libs.color.picker)
+
     //
     implementation(project(":core"))
     implementation(project(":data"))

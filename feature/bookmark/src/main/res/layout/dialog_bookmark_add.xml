@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tilBookmark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtBookmark"
+            android:hint="Nombre del marcador"
+            android:singleLine="false"
+
+            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvColorDesc"
+        tools:text ="#ff45fc4"
+        tools:background="#ffc4df"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/tilBookmark"
+        app:layout_constraintTop_toBottomOf="@id/tilBookmark"
+        android:layout_marginTop="24dp"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSelectColor"
+        android:src="@drawable/ic_colors"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
+        app:iconGravity="textStart"
+       style="@style/Widget.Material3.Button.IconButton"
+        app:layout_constraintEnd_toEndOf="@id/tilBookmark"
+        app:layout_constraintTop_toBottomOf="@id/tilBookmark"
+        android:layout_marginTop="24dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
