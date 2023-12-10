@@ -9,7 +9,9 @@
     app:strokeWidth="0dp"
     app:cardElevation="8dp"
     android:layout_margin="4dp"
-
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

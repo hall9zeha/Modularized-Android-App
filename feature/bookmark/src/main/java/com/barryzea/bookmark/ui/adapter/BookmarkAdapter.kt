@@ -17,7 +17,7 @@ import com.barryzea.models.model.Tag
  * Copyright (c)  All rights reserved.
  ***/
 
-class BookmarkAdapter:RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
+class BookmarkAdapter(private val onLongClick:(bookmark:Tag)->Unit, private val onClick:()->Unit):RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
     private var bookmarks:MutableList<Tag> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
@@ -48,11 +48,20 @@ class BookmarkAdapter:RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
             notifyItemChanged(index)
         }
     }
+    fun remove(bookmark:Tag){
+        if(bookmarks.contains(bookmark)){
+            val index = bookmarks.indexOf(bookmark)
+            bookmarks.remove(bookmark)
+            notifyItemRemoved(index)
+        }
+    }
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         private val bind = ItemBookmarkBinding.bind(itemView)
         fun onBind(tag:Tag) = with(bind){
             tvDescription.text = tag.description
             cardViewTag.setCardBackgroundColor(Color.parseColor(tag.color))
+            root.setOnClickListener { onClick() }
+            root.setOnLongClickListener { onLongClick(tag); true }
         }
     }
 }

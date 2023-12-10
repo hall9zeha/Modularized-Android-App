@@ -13,6 +13,8 @@ import com.barryzea.bookmark.databinding.FragmentBookmarkBinding
 
 import com.barryzea.bookmark.ui.adapter.BookmarkAdapter
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
+import com.barryzea.models.model.Tag
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,7 +30,7 @@ class BookmarkFragment : Fragment() {
     private val bind: FragmentBookmarkBinding get() = _bind!!
     private lateinit var bookmarkAdapter:BookmarkAdapter
     private val layoutManager by lazy { LinearLayoutManager(context,RecyclerView.VERTICAL, false) }
-
+    private var bookmark: Tag?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -73,16 +75,23 @@ class BookmarkFragment : Fragment() {
             it?.let{bookmarkAdapter.add(it!!)}
         }
         viewModel.tagRowDeleted.observe(viewLifecycleOwner){
-
+            it?.let{bookmarkAdapter.remove(bookmark!!)}
         }
     }
     private fun setUpAdapter(){
-        bookmarkAdapter = BookmarkAdapter()
+        bookmarkAdapter = BookmarkAdapter(::removeItem,::onClickItem)
         bind.rvBookmark.apply {
             layoutManager = this@BookmarkFragment.layoutManager
             setHasFixedSize(true)
             adapter= bookmarkAdapter
         }
+    }
+    private fun removeItem(bookmark:Tag){
+        viewModel.deleteTag(bookmark)
+        this@BookmarkFragment.bookmark = bookmark
+    }
+    private fun onClickItem(){
+        Snackbar.make(bind.root,"Presione largamente para eliminar",Snackbar.LENGTH_SHORT).show()
     }
     companion object {
 
