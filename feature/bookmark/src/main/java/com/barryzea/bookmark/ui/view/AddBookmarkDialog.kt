@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.barryzea.bookmark.R
+import com.barryzea.core.R as core_res
 import com.barryzea.bookmark.databinding.DialogBookmarkAddBinding
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.models.model.Tag
@@ -52,8 +53,8 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
             dialogView?.let{onViewCreated(it,savedInstanceState)}
             val builder = MaterialAlertDialogBuilder(ac)
                 .setView(dialogView)
-                .setPositiveButton("Accept",null)
-                .setNegativeButton("Cancel",null)
+                .setPositiveButton(getString(core_res.string.accept),null)
+                .setNegativeButton(getString(core_res.string.cancel),null)
                 .create()
             builder.setOnShowListener(this)
             return builder
@@ -108,15 +109,15 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
             viewModel.saveTag(bookmark)
 
         }else{
-            bind.edtBookmark.error = "Tiene que escribir algo"
+            bind.edtBookmark.error = getString(core_res.string.empty_desc_error)
         }
     }
 
     private fun showColorSelectDialog() {
         ColorPickerDialog.Builder(context)
-            .setTitle("Selecciona un color")
+            .setTitle(getString(core_res.string.select_color))
             .setPreferenceName("colorPicker")
-            .setPositiveButton("Ok", object:ColorEnvelopeListener{
+            .setPositiveButton(getString(core_res.string.ok), object:ColorEnvelopeListener{
                 override fun onColorSelected(envelope: ColorEnvelope?, fromUser: Boolean) {
                     Log.e("COLOR-SELECTED", "setUpColorSelectDialog: ${envelope?.color}" )
                     Log.e("COLOR-HEX", "setUpColorSelectDialog: ${envelope?.hexCode}" )
@@ -125,7 +126,7 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
                 }
 
             })
-            .setNegativeButton("Cancel"){dialog,i->
+            .setNegativeButton(getString(core_res.string.cancel)){ dialog, i->
                 dialog.dismiss()
             }
             .attachAlphaSlideBar(true)

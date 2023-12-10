@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.barryzea.bookmark.R
+import com.barryzea.core.R as core_res
 import com.barryzea.bookmark.databinding.FragmentBookmarkBinding
 
 import com.barryzea.bookmark.ui.adapter.BookmarkAdapter
@@ -91,7 +93,7 @@ class BookmarkFragment : Fragment() {
         this@BookmarkFragment.bookmark = bookmark
     }
     private fun onClickItem(){
-        Snackbar.make(bind.root,"Presione largamente para eliminar",Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(bind.root, getString(core_res.string.long_press_msg),Snackbar.LENGTH_SHORT).show()
     }
     companion object {
 

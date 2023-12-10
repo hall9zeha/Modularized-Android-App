@@ -1,4 +1,11 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">ModularizedApp</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="long_press_msg">Presione largamente para eliminar</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="empty_desc_error">Tiene que escribir algo</string>
+    <string name="select_color">Selecciona un color</string>
+    <string name="ok">Ok</string>
 </resources>
