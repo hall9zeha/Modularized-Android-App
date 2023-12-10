@@ -1,6 +1,7 @@
 package com.barryzea.bookmark.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,10 +63,14 @@ class BookmarkFragment : Fragment() {
         }
     }
     private fun setUpObservers(){
+        viewModel.fetchAllTags()
         viewModel.bookmarks.observe(viewLifecycleOwner){
-            it?.let {bookmarks->
+           it?.let {bookmarks->
                 bookmarkAdapter.addAll(bookmarks)
             }
+        }
+        viewModel.bookmarkById.observe(viewLifecycleOwner){
+            it?.let{bookmarkAdapter.add(it!!)}
         }
         viewModel.tagRowDeleted.observe(viewLifecycleOwner){
 

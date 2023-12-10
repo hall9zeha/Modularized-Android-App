@@ -44,7 +44,7 @@ interface MyDao {
     @Delete
     suspend fun deleteTag(tag:Tag):Int
     @Transaction
-    @Query("select * from tag")
+    @Query("select * from Tag")
     suspend fun getAllTag():List<Tag>
 
     @Transaction
