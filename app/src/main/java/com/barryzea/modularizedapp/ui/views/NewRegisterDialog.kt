@@ -3,6 +3,7 @@ package com.barryzea.modularizedapp.ui.views
 import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -17,6 +18,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import com.barryzea.bookmark.ui.view.AddBookmarkDialog
+import com.barryzea.bookmark.ui.view.BookmarkListDialog
+import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.models.model.Note
 import com.barryzea.core.R
 
@@ -42,6 +45,7 @@ class NewRegisterDialog: DialogFragment(){
     //y así usar los mismos observadores usamos (ownerProducers = {requireActivity})
     //Si el dialogFragment es lanzado desde un Fragment usamos  (ownerProducers = {requireParentFragment})
     private val viewModel:MainViewModel by viewModels(ownerProducer = {requireParentFragment()})
+    private val bookmarkViewModel:BookmarkViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.myFullScreenDialog)
@@ -93,8 +97,8 @@ class NewRegisterDialog: DialogFragment(){
        bind.toolbarDetail.setOnMenuItemClickListener {
            when(it.itemId){
                R.id.itemTag-> {
-                   AddBookmarkDialog().show(childFragmentManager.beginTransaction(),AddBookmarkDialog::class.simpleName
-                   )
+                   BookmarkListDialog().show(childFragmentManager.beginTransaction(), BookmarkListDialog::class.simpleName)
+
                }
            }
            true
@@ -130,6 +134,9 @@ class NewRegisterDialog: DialogFragment(){
         viewModel.updatedRegisterRow.observe(this){
             viewModel.setRegisterId(entity!!.idNote)
             dismiss()
+        }
+        bookmarkViewModel.bookmarkById.observe(this){
+            Log.e("BOOKMARK_IN_NOTE", it.toString() )
         }
     }
     private fun maintenanceRegister(){

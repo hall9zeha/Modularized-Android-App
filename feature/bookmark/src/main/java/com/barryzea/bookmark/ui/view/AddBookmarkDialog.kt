@@ -67,6 +67,7 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.dialog_bookmark_add,container,false)
     }
 
@@ -75,6 +76,7 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setUpObservers(bind)
         bind.btnSelectColor.setOnClickListener {
             showColorSelectDialog()
@@ -89,6 +91,7 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
             positiveButton.setOnClickListener {
                 saveBookmark()
             }
+
         }
     }
 
