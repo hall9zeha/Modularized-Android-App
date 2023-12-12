@@ -86,7 +86,21 @@ class BookmarkFragment : Fragment() {
             layoutManager = this@BookmarkFragment.layoutManager
             setHasFixedSize(true)
             adapter= bookmarkAdapter
+
         }
+        setupOnScrollListener()
+    }
+    private fun setupOnScrollListener(){
+        bind.rvBookmark.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy>0){
+                    if(bind.fabBookmark.isShown)bind.fabBookmark.hide()
+                }else if(dy<0){
+                    if(!bind.fabBookmark.isShown)bind.fabBookmark.show()
+                }
+            }
+        })
     }
     private fun removeItem(bookmark:Tag){
         viewModel.deleteTag(bookmark)
@@ -95,6 +109,7 @@ class BookmarkFragment : Fragment() {
     private fun onClickItem(){
         Snackbar.make(bind.root, getString(core_res.string.long_press_msg),Snackbar.LENGTH_SHORT).show()
     }
+
     companion object {
 
         @JvmStatic

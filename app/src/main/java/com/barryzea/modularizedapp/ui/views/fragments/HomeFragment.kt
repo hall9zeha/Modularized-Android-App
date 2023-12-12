@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.barryzea.models.model.Note
-import com.barryzea.modularizedapp.R
 import com.barryzea.modularizedapp.databinding.FragmentHomeBinding
 import com.barryzea.modularizedapp.ui.adapter.MainAdapter
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
@@ -84,9 +83,9 @@ class HomeFragment : Fragment() {
             layoutManager=staggeredGrid
             adapter=this@HomeFragment.adapter
         }
-        setupScrollList()
+        setupScrollListener()
     }
-    private fun setupScrollList(){
+    private fun setupScrollListener(){
         bind.rvNotes.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)

@@ -9,12 +9,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import com.barryzea.bookmark.ui.view.AddBookmarkDialog
 import com.barryzea.models.model.Note
 import com.barryzea.core.R
 
@@ -89,6 +91,12 @@ class NewRegisterDialog: DialogFragment(){
    private fun setUpMenuProvider(){
        bind.toolbarDetail.inflateMenu(R.menu.note_menu)
        bind.toolbarDetail.setOnMenuItemClickListener {
+           when(it.itemId){
+               R.id.itemTag-> {
+                   AddBookmarkDialog().show(childFragmentManager.beginTransaction(),AddBookmarkDialog::class.simpleName
+                   )
+               }
+           }
            true
        }
        //No infla el menú en el toolbar del dialog fragment
