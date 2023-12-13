@@ -1,6 +1,8 @@
 package com.barryzea.modularizedapp.ui.views
 
 import android.app.Dialog
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,15 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.contains
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.barryzea.bookmark.ui.view.BookmarkListDialog
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.core.R
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.Tag
 import com.barryzea.modularizedapp.databinding.DetailScreenDialogBinding
 import com.barryzea.modularizedapp.ui.common.EXTRA_KEY
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -129,9 +134,20 @@ class NewRegisterDialog: DialogFragment(){
         }
         bookmarkViewModel.bookmarkById.observe(this){
             it?.let{
+                addBookmark(it)
                 Log.e("BOOKMARK_IN_NOTE", it.toString() )
             }
         }
+    }
+    private fun addBookmark(bookmark:Tag){
+        val tag = Chip(context).apply{
+            id = bookmark.idTag.toInt()
+            chipStrokeColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
+            rippleColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
+            text = bookmark.description
+        }
+        val chip = bind.chipGroupTags.findViewById<Chip>(bookmark.idTag.toInt())
+        if(bind.chipGroupTags.indexOfChild(chip) == -1){ bind.chipGroupTags.addView(tag)}
     }
     private fun maintenanceRegister(){
         if(isNewRegister) {

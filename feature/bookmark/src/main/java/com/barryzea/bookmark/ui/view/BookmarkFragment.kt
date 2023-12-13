@@ -75,7 +75,10 @@ class BookmarkFragment : Fragment() {
             }
         }
         viewModel.bookmarkById.observe(viewLifecycleOwner){
-            it?.let{bookmarkAdapter.add(it!!)}
+            it?.let{bookmarkAdapter.add(it!!)
+           // bind.rvBookmark.smoothScrollToPosition(bookmarkAdapter.itemCount-1)
+           bind.rvBookmark.smoothScrollToPosition(0)
+            }
         }
         viewModel.tagRowDeleted.observe(viewLifecycleOwner){
             it?.let{bookmarkAdapter.remove(bookmark!!)}

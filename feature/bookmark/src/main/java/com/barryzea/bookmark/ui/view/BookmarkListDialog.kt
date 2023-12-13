@@ -82,6 +82,7 @@ class BookmarkListDialog: DialogFragment() {
                 if(bookmark.color.isNotEmpty())rippleColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(255)
                 setOnClickListener {
                     viewModel.getBookmarkById(bookmark.idTag)
+                    dismiss()
                 }
             }
             bind.bookmarkChips.addView(chip)
