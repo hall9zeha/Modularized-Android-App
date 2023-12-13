@@ -71,6 +71,7 @@ class BookmarkFragment : Fragment() {
         viewModel.bookmarks.observe(viewLifecycleOwner){
            it?.let {bookmarks->
                 bookmarkAdapter.addAll(bookmarks)
+
             }
         }
         viewModel.bookmarkById.observe(viewLifecycleOwner){
@@ -78,6 +79,12 @@ class BookmarkFragment : Fragment() {
         }
         viewModel.tagRowDeleted.observe(viewLifecycleOwner){
             it?.let{bookmarkAdapter.remove(bookmark!!)}
+
+            val isAtTop = bind.rvBookmark.canScrollVertically(-1)
+            val isAtBottom = !bind.rvBookmark.canScrollVertically(1)
+            if (isAtTop && isAtBottom ) {
+                bind.fabBookmark.show()
+            }
         }
     }
     private fun setUpAdapter(){

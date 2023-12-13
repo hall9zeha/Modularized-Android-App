@@ -41,48 +41,22 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
     private lateinit var positiveButton:Button
     private lateinit var bookmark:Tag
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        activity?.let{ac->
-            dialogView = onCreateView(LayoutInflater.from(requireContext()),null,savedInstanceState)
-            dialogView?.let{ _bind = DialogBookmarkAddBinding.bind(it)}
+        activity?.let { ac ->
+            _bind = DialogBookmarkAddBinding.inflate(LayoutInflater.from(activity))
 
-            dialogView?.let{onViewCreated(it,savedInstanceState)}
-            val builder = MaterialAlertDialogBuilder(ac)
-                .setView(dialogView)
-                .setPositiveButton(getString(core_res.string.accept),null)
-                .setNegativeButton(getString(core_res.string.cancel),null)
-                .create()
-            builder.setOnShowListener(this)
-            return builder
+            _bind?.let {
+                val builder = MaterialAlertDialogBuilder(ac)
+                    .setView(dialogView)
+                    .setPositiveButton(getString(core_res.string.accept), null)
+                    .setNegativeButton(getString(core_res.string.cancel), null)
+                    .setView(it.root)
+                    .create()
+                builder.setOnShowListener(this)
+                return builder
+            }
         }
         return super.onCreateDialog(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.dialog_bookmark_add,container,false)
-    }
-
-    override fun getView(): View? {
-        return dialogView
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setUpObservers(bind)
-        bind.btnSelectColor.setOnClickListener {
-            showColorSelectDialog()
-        }
-
-
     }
 
     override fun onShow(dialog: DialogInterface?) {
@@ -91,43 +65,42 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
             positiveButton.setOnClickListener {
                 saveBookmark()
             }
-
+        }
+        setUpObservers()
+        bind.btnSelectColor.setOnClickListener {
+            showColorSelectDialog()
         }
     }
-
-    private fun setUpObservers(bind: DialogBookmarkAddBinding) {
-        viewModel.colorSelected.observe(this){
-            bind.tvColorDesc.text = it
-            bind.tvColorDesc.setBackgroundColor(Color.parseColor(it))
-
-        }
+    private fun setUpObservers() {
         viewModel.idTagInserted.observe(this){
-            viewModel.getBookmarkById(it!!)
+            it?.let{viewModel.getBookmarkById(it!!)}
             dismiss()
         }
     }
     private fun saveBookmark(){
         if(bind.edtBookmark.text!!.isNotEmpty()){
-            bookmark=Tag(description = bind.edtBookmark.text.toString(),color=bind.tvColorDesc.text.toString())
+            bookmark=Tag(description = bind.edtBookmark.text.toString(),
+                color=if(bind.tvColorDesc.text.isNotEmpty()) bind.tvColorDesc.text.toString() else "#323232")
             viewModel.saveTag(bookmark)
 
         }else{
             bind.edtBookmark.error = getString(core_res.string.empty_desc_error)
         }
     }
-
     private fun showColorSelectDialog() {
         ColorPickerDialog.Builder(context)
             .setTitle(getString(core_res.string.select_color))
             .setPreferenceName("colorPicker")
             .setPositiveButton(getString(core_res.string.ok), object:ColorEnvelopeListener{
                 override fun onColorSelected(envelope: ColorEnvelope?, fromUser: Boolean) {
+
                     Log.e("COLOR-SELECTED", "setUpColorSelectDialog: ${envelope?.color}" )
                     Log.e("COLOR-HEX", "setUpColorSelectDialog: ${envelope?.hexCode}" )
-                    viewModel.setColorSelected("#"+envelope?.hexCode.toString())
+                    val selectedColorHex="#"+envelope?.hexCode.toString()
+                    bind.tvColorDesc.text = selectedColorHex
+                    bind.tvColorDesc.setBackgroundColor(Color.parseColor(selectedColorHex))
 
                 }
-
             })
             .setNegativeButton(getString(core_res.string.cancel)){ dialog, i->
                 dialog.dismiss()
@@ -137,7 +110,6 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
             .setBottomSpace(12)
             .show()
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _bind = null

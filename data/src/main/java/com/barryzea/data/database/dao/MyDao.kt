@@ -34,7 +34,7 @@ interface MyDao {
     suspend fun getRegisterById(id:Long):Note
 
     //For Tags
-    @Transaction
+    //@Transaction
     @Insert
     suspend fun saveTag(tag:Tag):Long
     @Transaction

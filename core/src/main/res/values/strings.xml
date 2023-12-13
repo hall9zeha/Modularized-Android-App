@@ -9,4 +9,5 @@
     <string name="select_color">Selecciona un color</string>
     <string name="ok">Ok</string>
     <string name="bookmark_title">Marcadores</string>
+    <string name="new_note">Nueva nota</string>
 </resources>

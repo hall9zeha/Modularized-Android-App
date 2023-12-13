@@ -5,24 +5,15 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import com.barryzea.bookmark.ui.view.AddBookmarkDialog
 import com.barryzea.bookmark.ui.view.BookmarkListDialog
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
-import com.barryzea.models.model.Note
 import com.barryzea.core.R
-
+import com.barryzea.models.model.Note
 import com.barryzea.modularizedapp.databinding.DetailScreenDialogBinding
 import com.barryzea.modularizedapp.ui.common.EXTRA_KEY
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
@@ -46,6 +37,7 @@ class NewRegisterDialog: DialogFragment(){
     //Si el dialogFragment es lanzado desde un Fragment usamos  (ownerProducers = {requireParentFragment})
     private val viewModel:MainViewModel by viewModels(ownerProducer = {requireParentFragment()})
     private val bookmarkViewModel:BookmarkViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.myFullScreenDialog)
@@ -70,7 +62,7 @@ class NewRegisterDialog: DialogFragment(){
                 b.toolbarDetail.setNavigationOnClickListener {
                    maintenanceRegister()
                 }
-                b.toolbarDetail.title = "Nueva nota"
+                b.toolbarDetail.title = getString(R.string.new_note)
                 return b.root
             }
         }
@@ -127,6 +119,7 @@ class NewRegisterDialog: DialogFragment(){
         bind.tvContent.setText(entity.description)
     }
     private fun setUpObservers(){
+
         viewModel.idOfRegisterInserted.observe(this){
             viewModel.setRegisterId(it!!)
             dismiss()
@@ -136,8 +129,13 @@ class NewRegisterDialog: DialogFragment(){
             dismiss()
         }
         bookmarkViewModel.bookmarkById.observe(this){
-            Log.e("BOOKMARK_IN_NOTE", it.toString() )
+            it?.let{
+
+                Log.e("BOOKMARK_IN_NOTE", it.toString() )
+            }
+
         }
+
     }
     private fun maintenanceRegister(){
         if(isNewRegister) {
