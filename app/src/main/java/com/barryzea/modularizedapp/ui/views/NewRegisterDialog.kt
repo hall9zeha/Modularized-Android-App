@@ -90,7 +90,6 @@ class NewRegisterDialog: DialogFragment(){
            when(it.itemId){
                R.id.itemTag-> {
                    BookmarkListDialog().show(childFragmentManager.beginTransaction(), BookmarkListDialog::class.simpleName)
-
                }
            }
            true
@@ -130,12 +129,9 @@ class NewRegisterDialog: DialogFragment(){
         }
         bookmarkViewModel.bookmarkById.observe(this){
             it?.let{
-
                 Log.e("BOOKMARK_IN_NOTE", it.toString() )
             }
-
         }
-
     }
     private fun maintenanceRegister(){
         if(isNewRegister) {

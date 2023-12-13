@@ -7,7 +7,7 @@
     android:id="@+id/cardViewTag"
     android:minHeight="40dp"
     app:strokeWidth="0dp"
-    app:cardElevation="4dp"
+    app:cardElevation="2dp"
     android:layout_margin="4dp"
     android:clickable="true"
     android:focusable="true"
@@ -19,6 +19,14 @@
         android:id="@+id/ctlContentMain"
         android:padding="8dp"
         >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/ivColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvDescription"/>
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,7 +34,8 @@
         android:textStyle="bold"
         android:ellipsize="end"
         tools:text="Descripción de la etiqueta marcador"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@id/ivColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

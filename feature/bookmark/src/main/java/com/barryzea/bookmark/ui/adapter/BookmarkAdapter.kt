@@ -1,5 +1,6 @@
 package com.barryzea.bookmark.ui.adapter
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -24,11 +25,9 @@ class BookmarkAdapter(private val onLongClick:(bookmark:Tag)->Unit, private val 
         val itemView = LayoutInflater.from(context).inflate(R.layout.item_bookmark,parent,false)
         return ViewHolder(itemView)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.onBind(bookmarks[position])
     }
-
     override fun getItemCount()= bookmarks.size
     fun addAll(bookmarkList:List<Tag>){
         bookmarkList.forEach{add(it) }
@@ -59,7 +58,11 @@ class BookmarkAdapter(private val onLongClick:(bookmark:Tag)->Unit, private val 
         private val bind = ItemBookmarkBinding.bind(itemView)
         fun onBind(tag:Tag) = with(bind){
             tvDescription.text = tag.description
-            cardViewTag.setCardBackgroundColor(Color.parseColor(tag.color))
+            cardViewTag.strokeColor = Color.parseColor(tag.color)
+            cardViewTag.strokeWidth = 3
+            cardViewTag.rippleColor = ColorStateList.valueOf(Color.parseColor(tag.color)).withAlpha(255)
+            ivColor.setBackgroundColor(Color.parseColor(tag.color))
+            //cardViewTag.setCardBackgroundColor(Color.parseColor(tag.color))
             root.setOnClickListener { onClick() }
             root.setOnLongClickListener { onLongClick(tag); true }
         }
