@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tvContent"/>
 
-            >
+
         </HorizontalScrollView>
         <EditText
             android:layout_width="match_parent"
@@ -57,4 +57,8 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--Este diseño viene desde el módulo Bookmark-->
+   <include layout="@layout/dialog_list_bookmark"
+       android:id="@+id/bottomSheetListBookmark"
+       />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

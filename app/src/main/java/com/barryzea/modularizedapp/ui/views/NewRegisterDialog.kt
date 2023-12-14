@@ -10,18 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.core.view.contains
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.barryzea.bookmark.ui.view.BookmarkListDialog
+import com.barryzea.bookmark.ui.view.AddBookmarkDialog
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.core.R
 import com.barryzea.models.model.Note
 import com.barryzea.models.model.NoteJoinTag
 import com.barryzea.models.model.Tag
 import com.barryzea.modularizedapp.databinding.DetailScreenDialogBinding
+
 import com.barryzea.modularizedapp.ui.common.EXTRA_KEY
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,9 +36,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewRegisterDialog: DialogFragment(){
     private var entity:Note?=null
-    private var _bind:DetailScreenDialogBinding?=null
+    private var _bind: DetailScreenDialogBinding?=null
     private var isNewRegister:Boolean = true
     private var bookmarkByNote:MutableList<Long> = arrayListOf()
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private var isExpanded=false
     private val bind:DetailScreenDialogBinding get() = _bind!!
     //Para que la instancia del view model sea la misma que en la actividad principal
     //y así usar los mismos observadores usamos (ownerProducers = {requireActivity})
@@ -53,7 +56,11 @@ class NewRegisterDialog: DialogFragment(){
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
          return object:Dialog(requireActivity(),theme){
             override fun onBackPressed() {
-              maintenanceRegister()
+                if(isExpanded){
+                    bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+                }else {
+                    maintenanceRegister()
+                }
             }
         }
     }
@@ -82,11 +89,16 @@ class NewRegisterDialog: DialogFragment(){
 
         setUpMenuProvider()
         getIntentExtras()
+        setUpBottomSheet()
         setUpObservers()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requireActivity().onBackPressedDispatcher.addCallback(this, object :OnBackPressedCallback(true){
                 override fun handleOnBackPressed() {
-                    maintenanceRegister()
+                    if(isExpanded){
+                        bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+                    }else {
+                        maintenanceRegister()
+                    }
                 }
             })
         }
@@ -96,7 +108,9 @@ class NewRegisterDialog: DialogFragment(){
        bind.toolbarDetail.setOnMenuItemClickListener {
            when(it.itemId){
                R.id.itemTag-> {
-                   BookmarkListDialog().show(childFragmentManager.beginTransaction(), BookmarkListDialog::class.simpleName)
+                   if(isExpanded) bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+                   else bottomSheetBehavior.state=BottomSheetBehavior.STATE_EXPANDED
+
                }
            }
            true
@@ -125,7 +139,7 @@ class NewRegisterDialog: DialogFragment(){
         bind.tvContent.setText(entity.description)
     }
     private fun setUpObservers(){
-
+        bookmarkViewModel.fetchAllTags()
         viewModel.idOfRegisterInserted.observe(this){idNote->
             viewModel.setRegisterId(idNote!!)
             if(bookmarkByNote.isNotEmpty()){
@@ -146,8 +160,56 @@ class NewRegisterDialog: DialogFragment(){
         bookmarkViewModel.bookmarkById.observe(this){
             it?.let{
                 addBookmark(it)
+                bookmarkViewModel.fetchAllTags()
                 Log.e("BOOKMARK_IN_NOTE", it.toString() )
             }
+        }
+
+        bookmarkViewModel.bookmarks.observe(this){
+            it?.let{setUpBookmarksChipGroup(it)}
+        }
+    }
+    private fun setUpBottomSheet(){
+        bind.bottomSheetListBookmark.tvHeader.text = getString(R.string.bookmark_title)
+        bottomSheetBehavior = BottomSheetBehavior.from(bind.bottomSheetListBookmark.bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        bottomSheetBehavior.addBottomSheetCallback(object:BottomSheetBehavior.BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when(newState){
+                    BottomSheetBehavior.STATE_EXPANDED->isExpanded=true
+                    BottomSheetBehavior.STATE_COLLAPSED->isExpanded=false
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+        })
+        //Listeners
+        bind.bottomSheetListBookmark.btnAddBookmark.setOnClickListener{
+            AddBookmarkDialog().show(childFragmentManager.beginTransaction(), AddBookmarkDialog::class.simpleName)
+            bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+    private fun setUpBookmarksChipGroup(bookmarks:List<Tag>){
+        bind.bottomSheetListBookmark.bookmarkChips.removeAllViews()
+        bookmarks.forEach {bookmark->
+            val chip=Chip(context).apply {
+                id = bookmark.idTag.toInt()
+                text=bookmark.description
+                chipStrokeWidth = 3F
+                if(bookmark.color.isNotEmpty())chipStrokeColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
+                if(bookmark.color.isNotEmpty())rippleColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(255)
+                if(bookmark.color.isNotEmpty())chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
+
+                setOnClickListener {
+                    //bookmarkViewModel.getBookmarkById(bookmark.idTag)
+                    addBookmark(bookmark)
+                    bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+                }
+            }
+            bind.bottomSheetListBookmark.bookmarkChips.addView(chip)
+
         }
     }
     private fun addBookmark(bookmark:Tag){
@@ -155,6 +217,7 @@ class NewRegisterDialog: DialogFragment(){
             id = bookmark.idTag.toInt()
             chipStrokeColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
             rippleColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
+            chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
             text = bookmark.description
         }
         val chip = bind.chipGroupTags.findViewById<Chip>(bookmark.idTag.toInt())
