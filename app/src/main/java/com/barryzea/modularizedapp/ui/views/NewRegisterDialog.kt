@@ -17,6 +17,7 @@ import com.barryzea.bookmark.ui.view.BookmarkListDialog
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.core.R
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.NoteJoinTag
 import com.barryzea.models.model.Tag
 import com.barryzea.modularizedapp.databinding.DetailScreenDialogBinding
 import com.barryzea.modularizedapp.ui.common.EXTRA_KEY
@@ -36,6 +37,7 @@ class NewRegisterDialog: DialogFragment(){
     private var entity:Note?=null
     private var _bind:DetailScreenDialogBinding?=null
     private var isNewRegister:Boolean = true
+    private var bookmarkByNote:MutableList<Long> = arrayListOf()
     private val bind:DetailScreenDialogBinding get() = _bind!!
     //Para que la instancia del view model sea la misma que en la actividad principal
     //y así usar los mismos observadores usamos (ownerProducers = {requireActivity})
@@ -124,12 +126,21 @@ class NewRegisterDialog: DialogFragment(){
     }
     private fun setUpObservers(){
 
-        viewModel.idOfRegisterInserted.observe(this){
-            viewModel.setRegisterId(it!!)
+        viewModel.idOfRegisterInserted.observe(this){idNote->
+            viewModel.setRegisterId(idNote!!)
+            if(bookmarkByNote.isNotEmpty()){
+                bookmarkByNote.forEach {idBookmark->
+                    bookmarkViewModel.saveNoteJoinTag(NoteJoinTag(idJoinNote = idNote, idJoinTag = idBookmark))
+                }
+            }
             dismiss()
         }
         viewModel.updatedRegisterRow.observe(this){
             viewModel.setRegisterId(entity!!.idNote)
+            if(bookmarkByNote.isNotEmpty()){
+                bookmarkByNote.forEach { idBookmark->
+                    bookmarkViewModel.saveNoteJoinTag(NoteJoinTag(idJoinNote = entity!!.idNote, idJoinTag = idBookmark )) }
+            }
             dismiss()
         }
         bookmarkViewModel.bookmarkById.observe(this){
@@ -147,7 +158,10 @@ class NewRegisterDialog: DialogFragment(){
             text = bookmark.description
         }
         val chip = bind.chipGroupTags.findViewById<Chip>(bookmark.idTag.toInt())
-        if(bind.chipGroupTags.indexOfChild(chip) == -1){ bind.chipGroupTags.addView(tag)}
+        if(bind.chipGroupTags.indexOfChild(chip) == -1){
+            bookmarkByNote.add(bookmark.idTag)
+            bind.chipGroupTags.addView(tag)
+        }
     }
     private fun maintenanceRegister(){
         if(isNewRegister) {

@@ -3,6 +3,7 @@ package com.barryzea.bookmark.ui.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.barryzea.data.repository.TagRepositoryImpl
+import com.barryzea.models.model.NoteJoinTag
 import com.barryzea.models.model.Tag
 import com.barryzea.modularizedapp.ui.common.ScopedViewModel
 import com.barryzea.modularizedapp.ui.common.SingleMutableLiveData
@@ -30,6 +31,9 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
     private var _bookmarkById:SingleMutableLiveData<Tag> = SingleMutableLiveData()
     val bookmarkById:SingleMutableLiveData<Tag> get()= _bookmarkById
 
+    private var _noteJoinTag:SingleMutableLiveData<NoteJoinTag> = SingleMutableLiveData()
+    val noteJoinTag:SingleMutableLiveData<NoteJoinTag> = _noteJoinTag
+
     init{
         initScope()
     }
@@ -49,6 +53,16 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
         launch{_bookmarkById.postValue(repository.getTagById(id))}
     }
 
+    //
+    fun saveNoteJoinTag(noteJoinTag: NoteJoinTag){
+        launch { repository.saveNoteJoinTag(noteJoinTag) }
+    }
+    fun deleteNoteJoinTag(noteJoinTag: NoteJoinTag){
+        launch { repository.deleteNoteJoinTag(noteJoinTag) }
+    }
+    fun getNoteJoinTagById(id:Long){
+        launch { _noteJoinTag.value=repository.getNoteJoinTagById(id) }
+    }
 
     override fun onCleared() {
         destroyScope()

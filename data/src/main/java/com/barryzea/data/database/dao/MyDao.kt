@@ -1,5 +1,6 @@
 package com.barryzea.data.database.dao
 
+import android.util.Log
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -7,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.NoteJoinTag
 import com.barryzea.models.model.Tag
 
 
@@ -51,5 +53,17 @@ interface MyDao {
     @Query("select * from Tag where idTag=:id")
     suspend fun getTagById(id:Long):Tag
 
+    //For inner join note and tag
+    @Transaction
+    @Insert
+    suspend fun saveNoteJoinTag(noteJoinTag:NoteJoinTag):Long
+
+    @Transaction
+    @Delete
+    suspend fun deleteNoteJoinTag(noteJoinTag: NoteJoinTag):Int
+
+    @Transaction
+    @Query("select * from NoteJoinTag where id=:id")
+    suspend fun getNoteJoinTagById(id:Long):NoteJoinTag
 
 }

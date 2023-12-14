@@ -17,7 +17,7 @@ import kotlinx.parcelize.Parcelize
 @Entity
 data class Note(
  @PrimaryKey(autoGenerate = true)
- @ColumnInfo(index = true)
+ @ColumnInfo(name = "idNote", index = true)
  val idNote:Long=0,
  val url:String="",
  val description:String=""):Parcelable {

@@ -2,6 +2,7 @@ package com.barryzea.data.repository
 
 import com.barryzea.abstraction.TagRepository
 import com.barryzea.data.database.db.MyDatabase
+import com.barryzea.models.model.NoteJoinTag
 import com.barryzea.models.model.Tag
 import javax.inject.Inject
 
@@ -19,4 +20,11 @@ class TagRepositoryImpl @Inject constructor(database: MyDatabase):TagRepository 
     override suspend fun updateTag(tag: Tag) = dao.updateTag(tag)
     override suspend fun getAllTags() = dao.getAllTag()
     override suspend fun getTagById(id: Long) = dao.getTagById(id)
+
+    //
+    override suspend fun saveNoteJoinTag(noteJoinTag: NoteJoinTag)=dao.saveNoteJoinTag(noteJoinTag)
+
+    override suspend fun deleteNoteJoinTag(noteJoinTag: NoteJoinTag)=dao.deleteNoteJoinTag(noteJoinTag)
+
+    override suspend fun getNoteJoinTagById(id: Long)=dao.getNoteJoinTagById(id)
 }

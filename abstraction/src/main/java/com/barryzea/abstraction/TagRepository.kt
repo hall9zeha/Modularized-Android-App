@@ -1,5 +1,6 @@
 package com.barryzea.abstraction
 
+import com.barryzea.models.model.NoteJoinTag
 import com.barryzea.models.model.Tag
 
 
@@ -16,4 +17,8 @@ interface TagRepository {
     suspend fun updateTag(tag: Tag):Int
     suspend fun getAllTags():List<Tag>
     suspend fun getTagById(id:Long):Tag
+    //
+    suspend fun saveNoteJoinTag(noteJoinTag: NoteJoinTag):Long
+    suspend fun deleteNoteJoinTag(noteJoinTag: NoteJoinTag):Int
+    suspend fun getNoteJoinTagById(id:Long):NoteJoinTag
 }
