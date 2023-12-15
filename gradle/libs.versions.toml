@@ -11,6 +11,7 @@ application = "8.1.1"
 core-ktx = "1.9.0"
 constraint-layout-version = "2.1.4"
 fragment = "1.6.2"
+flex-box-version ="3.0.0"
 hilt = "2.48.1"
 jvm = "1.9.0"
 junit = "4.13.2"
@@ -30,6 +31,7 @@ safe-args-version ="2.5.0"
 viewmodel-version = "2.6.1"
 color-picker-version = "2.3.0"
 
+
 [libraries]
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
@@ -39,6 +41,7 @@ androidx-constraintlayout = {group = "androidx.constraintlayout", name = "constr
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
+flex-box = {group = "com.google.android.flexbox", name = "flexbox", version.ref = "flex-box-version"}
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }

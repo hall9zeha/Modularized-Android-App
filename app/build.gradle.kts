@@ -62,6 +62,8 @@ dependencies {
     kaptTest(libs.hilt.compiler)
     //Color picker
     implementation(libs.color.picker)
+    //Fex box
+    implementation(libs.flex.box)
 
     // Modules
     implementation(project(":core"))

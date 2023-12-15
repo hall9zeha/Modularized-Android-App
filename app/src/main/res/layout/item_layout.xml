@@ -19,10 +19,9 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         android:id="@+id/ctlContent">
-        <LinearLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:id="@+id/lnTags"
             android:padding="4dp"
             app:layout_constraintStart_toStartOf="parent"
