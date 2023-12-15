@@ -75,6 +75,9 @@ class HomeFragment : Fragment() {
             viewModel.getRegisterById(it!!)
         }
         viewModel.entity.observe(viewLifecycleOwner){
+            it?.tags?.forEach { tag->
+                Log.e("MARCADOR", tag.color )
+            }
             adapter.addItem(it!!)
         }
         viewModel.deletedRegisterRow.observe(viewLifecycleOwner){

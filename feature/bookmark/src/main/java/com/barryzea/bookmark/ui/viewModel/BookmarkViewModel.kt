@@ -29,9 +29,6 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
     private var _bookmarkById:SingleMutableLiveData<Tag> = SingleMutableLiveData()
     val bookmarkById:SingleMutableLiveData<Tag> get()= _bookmarkById
 
-    private var _noteJoinTag:SingleMutableLiveData<NoteTagCrossRef> = SingleMutableLiveData()
-    val noteJoinTag:SingleMutableLiveData<NoteTagCrossRef> = _noteJoinTag
-
     init{
         initScope()
     }

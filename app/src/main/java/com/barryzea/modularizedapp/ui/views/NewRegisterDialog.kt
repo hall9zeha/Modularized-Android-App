@@ -133,6 +133,9 @@ class NewRegisterDialog: DialogFragment(){
        arguments?.let {
             entity = it.getParcelable(EXTRA_KEY)!!
             setUpDetail(entity!!.note)
+            entity?.tags?.forEach {bookmark->
+                addBookmark(bookmark,false)
+            }
             isNewRegister=false
         }
     }
@@ -151,16 +154,16 @@ class NewRegisterDialog: DialogFragment(){
             dismiss()
         }
         viewModel.updatedRegisterRow.observe(this){
-            viewModel.setRegisterId(entity!!.note.idNote)
             if(bookmarkByNote.isNotEmpty()){
                 bookmarkByNote.forEach { idBookmark->
                     bookmarkViewModel.saveNoteJoinTag(NoteTagCrossRef(idJoinNote = entity!!.note.idNote, idJoinTag = idBookmark )) }
             }
+            viewModel.setRegisterId(entity!!.note.idNote)
             dismiss()
         }
         bookmarkViewModel.bookmarkById.observe(this){
             it?.let{
-                addBookmark(it)
+                addBookmark(it,true)
                 bookmarkViewModel.fetchAllTags()
                 Log.e("BOOKMARK_IN_NOTE", it.toString() )
             }
@@ -205,7 +208,7 @@ class NewRegisterDialog: DialogFragment(){
 
                 setOnClickListener {
                     //bookmarkViewModel.getBookmarkById(bookmark.idTag)
-                    addBookmark(bookmark)
+                    addBookmark(bookmark,true)
                     bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
                 }
             }
@@ -213,7 +216,7 @@ class NewRegisterDialog: DialogFragment(){
 
         }
     }
-    private fun addBookmark(bookmark:Tag){
+    private fun addBookmark(bookmark:Tag, isNew:Boolean){
         val tag = Chip(context).apply{
             id = bookmark.idTag.toInt()
             chipStrokeColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
@@ -221,9 +224,13 @@ class NewRegisterDialog: DialogFragment(){
             chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
             text = bookmark.description
         }
-        val chip = bind.chipGroupTags.findViewById<Chip>(bookmark.idTag.toInt())
-        if(bind.chipGroupTags.indexOfChild(chip) == -1){
-            bookmarkByNote.add(bookmark.idTag)
+        if(isNew) {
+            val chip = bind.chipGroupTags.findViewById<Chip>(bookmark.idTag.toInt())
+            if (bind.chipGroupTags.indexOfChild(chip) == -1) {
+                bookmarkByNote.add(bookmark.idTag)
+                bind.chipGroupTags.addView(tag)
+            }
+        }else{
             bind.chipGroupTags.addView(tag)
         }
     }
