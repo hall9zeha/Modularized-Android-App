@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.NoteAndTag
 import com.barryzea.modularizedapp.R
 
 
@@ -13,17 +14,17 @@ import com.barryzea.modularizedapp.R
  * Copyright (c)  All rights reserved.
  **/
 
-class MainAdapter(private val onItemClick:(Note)->Unit, private val onItemDelete:(Note)->Unit):RecyclerView.Adapter<MainViewHolder>() {
- private var registerList = mutableListOf<Note>()
+class MainAdapter(private val onItemClick:(NoteAndTag)->Unit, private val onItemDelete:(NoteAndTag)->Unit):RecyclerView.Adapter<MainViewHolder>() {
+ private var registerList = mutableListOf<NoteAndTag>()
  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
   val context = parent.context
   val itemView = LayoutInflater.from(context).inflate(R.layout.item_layout,parent, false)
   return MainViewHolder(itemView)
  }
- fun addAll(registers:List<Note>){
+ fun addAll(registers:List<NoteAndTag>){
   registers.forEach { addItem(it) }
  }
- fun addItem(entity:Note){
+ fun addItem(entity:NoteAndTag){
   if(!registerList.contains(entity)){
    registerList.add(entity)
    notifyItemInserted(registerList.size -1)
@@ -31,14 +32,14 @@ class MainAdapter(private val onItemClick:(Note)->Unit, private val onItemDelete
    update(entity)
   }
  }
- fun removeItem(entity: Note){
+ fun removeItem(entity: NoteAndTag){
   if(registerList.contains(entity)){
    val index = registerList.indexOf(entity)
    registerList.remove(entity)
    notifyItemRemoved(index)
   }
  }
- private fun update(entity:Note){
+ private fun update(entity:NoteAndTag){
   val index = registerList.indexOf(entity)
   registerList[index] = entity
   notifyItemChanged(index)

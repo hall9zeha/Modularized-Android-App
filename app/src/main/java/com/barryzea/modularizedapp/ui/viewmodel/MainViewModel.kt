@@ -3,6 +3,7 @@ package com.barryzea.modularizedapp.ui.viewmodel
 import com.barryzea.data.repository.MainRepositoryImpl
 
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.NoteAndTag
 import com.barryzea.modularizedapp.ui.common.ScopedViewModel
 import com.barryzea.modularizedapp.ui.common.SingleMutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,11 +19,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MainRepositoryImpl): ScopedViewModel() {
-    private var _allRegisters:SingleMutableLiveData<List<Note>> = SingleMutableLiveData()
-    val allRegisters:SingleMutableLiveData<List<Note>> = _allRegisters
+    private var _allRegisters:SingleMutableLiveData<List<NoteAndTag>> = SingleMutableLiveData()
+    val allRegisters:SingleMutableLiveData<List<NoteAndTag>> = _allRegisters
 
-    private var _entity:SingleMutableLiveData<Note> = SingleMutableLiveData()
-    val entity:SingleMutableLiveData<Note> = _entity
+    private var _entity:SingleMutableLiveData<NoteAndTag> = SingleMutableLiveData()
+    val entity:SingleMutableLiveData<NoteAndTag> = _entity
 
     private var _idOfRegisterInserted:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val idOfRegisterInserted:SingleMutableLiveData<Long> = _idOfRegisterInserted

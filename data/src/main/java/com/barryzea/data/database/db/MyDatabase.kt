@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.barryzea.data.database.dao.MyDao
 import com.barryzea.models.model.Note
-import com.barryzea.models.model.NoteJoinTag
+import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.models.model.Tag
 
 
@@ -14,7 +14,7 @@ import com.barryzea.models.model.Tag
  * Copyright (c)  All rights reserved.
  **/
 
-@Database(entities = [Note::class, Tag::class, NoteJoinTag::class], version = 1, exportSchema = false)
+@Database(entities = [Note::class, Tag::class, NoteTagCrossRef::class], version = 1, exportSchema = false)
 abstract class MyDatabase:RoomDatabase() {
  abstract fun getDao(): MyDao
 }

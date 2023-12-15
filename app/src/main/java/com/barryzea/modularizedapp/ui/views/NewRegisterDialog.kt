@@ -16,7 +16,8 @@ import com.barryzea.bookmark.ui.view.AddBookmarkDialog
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.core.R
 import com.barryzea.models.model.Note
-import com.barryzea.models.model.NoteJoinTag
+import com.barryzea.models.model.NoteAndTag
+import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.models.model.Tag
 import com.barryzea.modularizedapp.databinding.DetailScreenDialogBinding
 
@@ -35,7 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewRegisterDialog: DialogFragment(){
-    private var entity:Note?=null
+    private var entity:NoteAndTag?=null
     private var _bind: DetailScreenDialogBinding?=null
     private var isNewRegister:Boolean = true
     private var bookmarkByNote:MutableList<Long> = arrayListOf()
@@ -131,7 +132,7 @@ class NewRegisterDialog: DialogFragment(){
     private fun getIntentExtras(){
        arguments?.let {
             entity = it.getParcelable(EXTRA_KEY)!!
-            setUpDetail(entity!!)
+            setUpDetail(entity!!.note)
             isNewRegister=false
         }
     }
@@ -144,16 +145,16 @@ class NewRegisterDialog: DialogFragment(){
             viewModel.setRegisterId(idNote!!)
             if(bookmarkByNote.isNotEmpty()){
                 bookmarkByNote.forEach {idBookmark->
-                    bookmarkViewModel.saveNoteJoinTag(NoteJoinTag(idJoinNote = idNote, idJoinTag = idBookmark))
+                    bookmarkViewModel.saveNoteJoinTag(NoteTagCrossRef(idJoinNote = idNote, idJoinTag = idBookmark))
                 }
             }
             dismiss()
         }
         viewModel.updatedRegisterRow.observe(this){
-            viewModel.setRegisterId(entity!!.idNote)
+            viewModel.setRegisterId(entity!!.note.idNote)
             if(bookmarkByNote.isNotEmpty()){
                 bookmarkByNote.forEach { idBookmark->
-                    bookmarkViewModel.saveNoteJoinTag(NoteJoinTag(idJoinNote = entity!!.idNote, idJoinTag = idBookmark )) }
+                    bookmarkViewModel.saveNoteJoinTag(NoteTagCrossRef(idJoinNote = entity!!.note.idNote, idJoinTag = idBookmark )) }
             }
             dismiss()
         }
@@ -231,9 +232,9 @@ class NewRegisterDialog: DialogFragment(){
             val entity = Note(description = bind.tvContent.text.toString())
             saveRegister(entity)}
         else{
-            val updateEntity= Note(idNote= entity!!.idNote,
+            val updateEntity= Note(idNote= entity!!.note.idNote,
                 description = bind.tvContent.text.toString(),
-                url = entity!!.url)
+                url = entity!!.note.url)
             updateRegister(updateEntity)
         }
     }
@@ -245,7 +246,7 @@ class NewRegisterDialog: DialogFragment(){
     }
     companion object{
         @JvmStatic
-        fun newInstance(param1:Note)=NewRegisterDialog().apply {
+        fun newInstance(param1:NoteAndTag)=NewRegisterDialog().apply {
             arguments = Bundle().apply {
                 putParcelable(EXTRA_KEY, param1)
             }

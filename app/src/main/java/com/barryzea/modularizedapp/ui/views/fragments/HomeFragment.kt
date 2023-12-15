@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.NoteAndTag
 import com.barryzea.modularizedapp.databinding.FragmentHomeBinding
 import com.barryzea.modularizedapp.ui.adapter.MainAdapter
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
     private val viewModel:MainViewModel by viewModels()
     private lateinit var adapter: MainAdapter
     private lateinit var staggeredGrid: StaggeredGridLayoutManager
-    private lateinit var entity: Note
+    private lateinit var entity: NoteAndTag
     private val bind:FragmentHomeBinding get() = _bind!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +63,13 @@ class HomeFragment : Fragment() {
     private fun setUpViewModel(){
         viewModel.fetchAllRegisters()
         viewModel.allRegisters.observe(viewLifecycleOwner){
-            Log.e("TAG", it.toString() )
-            adapter.addAll(it!!)
+            it?.let {
+                Log.e("TAG", it.toString())
+                adapter.addAll(it!!)
+                if(it.isNotEmpty()) {
+                    Log.e("TAGS", it[0].tags[0].description)
+                }
+            }
         }
         viewModel.registerId.observe(viewLifecycleOwner){
             viewModel.getRegisterById(it!!)
@@ -105,13 +111,13 @@ class HomeFragment : Fragment() {
             NewRegisterDialog().show(childFragmentManager.beginTransaction(), NewRegisterDialog::class.java.simpleName)
         }
     }
-    private fun onItemClick(entity:Note){
+    private fun onItemClick(entity:NoteAndTag){
         NewRegisterDialog.newInstance(entity).show(childFragmentManager.beginTransaction(),
             NewRegisterDialog::class.java.simpleName)
     }
-    private fun onItemDelete(entity: Note){
+    private fun onItemDelete(entity: NoteAndTag){
         this.entity=entity
-        viewModel.deleteRegister(entity.idNote)
+        viewModel.deleteRegister(entity.note.idNote)
     }
 
     companion object {

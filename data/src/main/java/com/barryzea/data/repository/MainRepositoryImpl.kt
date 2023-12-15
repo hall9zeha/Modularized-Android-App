@@ -3,6 +3,7 @@ package com.barryzea.data.repository
 import com.barryzea.abstraction.MainRepository
 import com.barryzea.data.database.db.MyDatabase
 import com.barryzea.models.model.Note
+import com.barryzea.models.model.NoteAndTag
 import javax.inject.Inject
 
 
@@ -21,6 +22,6 @@ class MainRepositoryImpl @Inject constructor(database: MyDatabase): MainReposito
 
     override suspend fun deleteRegister(idEntity: Long) = dao.deleteRegister(idEntity)
 
-    override suspend fun getAllRegisters(): List<Note> = dao.getAllRegisters()
+    override suspend fun getAllRegisters(): List<NoteAndTag> = dao.getAllRegisters()
     override suspend fun getRegisterById(id: Long) = dao.getRegisterById(id)
 }
