@@ -59,7 +59,7 @@ interface MyDao {
     //For inner join note and tag
     @Transaction
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveNoteJoinTag(noteJoinTag:NoteTagCrossRef):Long
+    suspend fun saveNoteTagCrossRef(noteJoinTag:NoteTagCrossRef):Long
 
     @Transaction
     @Delete

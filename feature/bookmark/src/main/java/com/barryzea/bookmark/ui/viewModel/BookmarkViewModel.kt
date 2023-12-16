@@ -1,6 +1,5 @@
 package com.barryzea.bookmark.ui.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import com.barryzea.data.repository.TagRepositoryImpl
 import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.models.model.Tag
@@ -53,7 +52,7 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
 
     //
     fun saveNoteJoinTag(noteJoinTag: NoteTagCrossRef){
-        launch { repository.saveNoteJoinTag(noteJoinTag) }
+        launch { repository.saveNoteTagCrossRef(noteJoinTag) }
     }
     fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef){
         launch{_bookmarkDeleteRow.value=repository.deleteNoteTagCrossRef(noteJoinTag)}

@@ -22,6 +22,6 @@ class TagRepositoryImpl @Inject constructor(database: MyDatabase):TagRepository 
     override suspend fun getTagById(id: Long) = dao.getTagById(id)
 
     //
-    override suspend fun saveNoteJoinTag(noteJoinTag: NoteTagCrossRef)=dao.saveNoteJoinTag(noteJoinTag)
+    override suspend fun saveNoteTagCrossRef(noteJoinTag: NoteTagCrossRef)=dao.saveNoteTagCrossRef(noteJoinTag)
     override suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef)=dao.deleteNoteTagCrossRef(noteJoinTag)
 }

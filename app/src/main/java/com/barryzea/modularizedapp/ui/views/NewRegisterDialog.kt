@@ -176,7 +176,8 @@ class NewRegisterDialog: DialogFragment(){
         }
         bookmarkViewModel.bookmarkDeleteRow.observe(this){
             it?.let{row->
-                if(row>0) Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
+                if(row>0) Toast.makeText(context,
+                    getString(R.string.deleted_msg), Toast.LENGTH_SHORT).show()
 
             }
         }
@@ -215,7 +216,6 @@ class NewRegisterDialog: DialogFragment(){
                 if(bookmark.color.isNotEmpty())chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
 
                 setOnClickListener {
-
                     addBookmark(bookmark,true)
                     bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
                 }
