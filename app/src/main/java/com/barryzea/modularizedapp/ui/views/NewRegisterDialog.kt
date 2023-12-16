@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -25,6 +26,7 @@ import com.barryzea.modularizedapp.ui.common.EXTRA_KEY
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -172,6 +174,12 @@ class NewRegisterDialog: DialogFragment(){
         bookmarkViewModel.bookmarks.observe(this){
             it?.let{setUpBookmarksChipGroup(it)}
         }
+        bookmarkViewModel.bookmarkDeleteRow.observe(this){
+            it?.let{row->
+                if(row>0) Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
+
+            }
+        }
     }
     private fun setUpBottomSheet(){
         bind.bottomSheetListBookmark.tvHeader.text = getString(R.string.bookmark_title)
@@ -207,7 +215,7 @@ class NewRegisterDialog: DialogFragment(){
                 if(bookmark.color.isNotEmpty())chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
 
                 setOnClickListener {
-                    //bookmarkViewModel.getBookmarkById(bookmark.idTag)
+
                     addBookmark(bookmark,true)
                     bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
                 }
@@ -223,6 +231,14 @@ class NewRegisterDialog: DialogFragment(){
             rippleColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
             chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
             text = bookmark.description
+            setOnLongClickListener {chip->
+                bookmarkViewModel.deleteNoteTagCrossRef(NoteTagCrossRef(idJoinNote = entity?.note?.idNote!!, idJoinTag = bookmark.idTag))
+                bind.chipGroupTags.removeView(chip)
+                true
+            }
+            setOnClickListener {
+                Snackbar.make(bind.root,R.string.long_press_msg,Snackbar.LENGTH_SHORT).show()
+            }
         }
         if(isNew) {
             val chip = bind.chipGroupTags.findViewById<Chip>(bookmark.idTag.toInt())

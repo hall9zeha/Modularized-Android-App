@@ -61,4 +61,7 @@ interface MyDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveNoteJoinTag(noteJoinTag:NoteTagCrossRef):Long
 
+    @Transaction
+    @Delete
+    suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef):Int
 }

@@ -19,6 +19,6 @@ interface TagRepository {
     suspend fun getTagById(id:Long):Tag
     //
     suspend fun saveNoteJoinTag(noteJoinTag: NoteTagCrossRef):Long
-
+    suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef):Int
 
 }

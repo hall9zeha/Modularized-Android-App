@@ -1,5 +1,6 @@
 package com.barryzea.bookmark.ui.viewModel
 
+import androidx.lifecycle.MutableLiveData
 import com.barryzea.data.repository.TagRepositoryImpl
 import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.models.model.Tag
@@ -28,6 +29,8 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
 
     private var _bookmarkById:SingleMutableLiveData<Tag> = SingleMutableLiveData()
     val bookmarkById:SingleMutableLiveData<Tag> get()= _bookmarkById
+    private var _bookmarkDeleteRow:SingleMutableLiveData<Int> = SingleMutableLiveData()
+    val bookmarkDeleteRow:SingleMutableLiveData<Int> = _bookmarkDeleteRow
 
     init{
         initScope()
@@ -52,7 +55,9 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
     fun saveNoteJoinTag(noteJoinTag: NoteTagCrossRef){
         launch { repository.saveNoteJoinTag(noteJoinTag) }
     }
-
+    fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef){
+        launch{_bookmarkDeleteRow.value=repository.deleteNoteTagCrossRef(noteJoinTag)}
+    }
     override fun onCleared() {
         destroyScope()
         super.onCleared()
