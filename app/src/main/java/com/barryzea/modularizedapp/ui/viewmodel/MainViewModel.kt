@@ -25,6 +25,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
     private var _entity:SingleMutableLiveData<NoteAndTag> = SingleMutableLiveData()
     val entity:SingleMutableLiveData<NoteAndTag> = _entity
 
+    private var _noteAndTagByTagId:SingleMutableLiveData<List<NoteAndTag>> = SingleMutableLiveData()
+    val noteAndTagByTagId:SingleMutableLiveData<List<NoteAndTag>> = _noteAndTagByTagId
+
     private var _idOfRegisterInserted:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val idOfRegisterInserted:SingleMutableLiveData<Long> = _idOfRegisterInserted
 
@@ -37,7 +40,6 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
     private var _registerId:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val registerId:SingleMutableLiveData<Long> = _registerId
 
-
     init {
         initScope()
     }
@@ -45,7 +47,10 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
         launch {_allRegisters.value =repository.getAllRegisters()}
     }
     fun getRegisterById(id: Long){
-        launch { _entity.value = repository.getRegisterById(id) }
+        launch { _entity.value=repository.getRegisterById(id) }
+    }
+    fun getNoteAndTagByTagId(tagId:Long){
+        launch{_noteAndTagByTagId.value = repository.fetchNoteAndTagsByTagId(tagId)}
     }
     fun saveRegister(entity: Note){
         launch {_idOfRegisterInserted.value = repository.saveRegister(entity) }
@@ -57,7 +62,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
         launch { _deletedRegisterRow.value = repository.deleteRegister(idEntity) }
     }
     fun setRegisterId(id:Long){
-        _registerId.value = id
+       launch {  _registerId.value = id}
     }
 
     override fun onCleared() {

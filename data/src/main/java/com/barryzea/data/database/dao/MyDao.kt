@@ -64,4 +64,9 @@ interface MyDao {
     @Transaction
     @Delete
     suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef):Int
+
+    //Obtenemos todas las notas unidas a determinado marcador
+    @Transaction
+    @Query("SELECT * FROM Note WHERE idNote IN (SELECT idNote FROM NoteTagCrossRef WHERE idTag = :idTag)")
+    suspend fun fetchNotesAndTagByTagId(idTag:Long):List<NoteAndTag>
 }

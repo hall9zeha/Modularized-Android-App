@@ -1,5 +1,7 @@
 package com.barryzea.abstraction
 
+import com.barryzea.models.model.Note
+import com.barryzea.models.model.NoteAndTag
 import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.models.model.Tag
 
@@ -20,5 +22,6 @@ interface TagRepository {
     //
     suspend fun saveNoteTagCrossRef(noteJoinTag: NoteTagCrossRef):Long
     suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef):Int
+
 
 }

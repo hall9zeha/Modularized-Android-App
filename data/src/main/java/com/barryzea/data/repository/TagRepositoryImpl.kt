@@ -2,6 +2,7 @@ package com.barryzea.data.repository
 
 import com.barryzea.abstraction.TagRepository
 import com.barryzea.data.database.db.MyDatabase
+import com.barryzea.models.model.Note
 import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.models.model.Tag
 import javax.inject.Inject
@@ -24,4 +25,5 @@ class TagRepositoryImpl @Inject constructor(database: MyDatabase):TagRepository 
     //
     override suspend fun saveNoteTagCrossRef(noteJoinTag: NoteTagCrossRef)=dao.saveNoteTagCrossRef(noteJoinTag)
     override suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef)=dao.deleteNoteTagCrossRef(noteJoinTag)
+
 }

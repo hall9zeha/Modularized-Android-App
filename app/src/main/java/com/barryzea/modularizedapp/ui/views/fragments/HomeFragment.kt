@@ -62,26 +62,25 @@ class HomeFragment : Fragment() {
     }
     private fun setUpViewModel(){
         viewModel.fetchAllRegisters()
+        //viewModel.getNoteAndTagByTagId(10)
         viewModel.allRegisters.observe(viewLifecycleOwner){
             it?.let {
-                Log.e("TAG", it.toString())
                 adapter.addAll(it!!)
-                if(it.isNotEmpty()) {
-                    Log.e("TAGS", it[0].tags[0].description)
-                }
             }
         }
         viewModel.registerId.observe(viewLifecycleOwner){
             viewModel.getRegisterById(it!!)
         }
         viewModel.entity.observe(viewLifecycleOwner){
-            it?.tags?.forEach { tag->
-                Log.e("MARCADOR", tag.color )
-            }
-            adapter.addItem(it!!)
+            it?.let{ adapter.addItem(it) }
         }
         viewModel.deletedRegisterRow.observe(viewLifecycleOwner){
             adapter.removeItem(entity)
+        }
+        viewModel.noteAndTagByTagId.observe(viewLifecycleOwner){
+            it?.let{
+                Log.e("BY-TAG-ID", it.toString() )
+            }
         }
     }
     private fun setUpAdapter(){

@@ -24,4 +24,6 @@ class MainRepositoryImpl @Inject constructor(database: MyDatabase): MainReposito
 
     override suspend fun getAllRegisters(): List<NoteAndTag> = dao.getAllRegisters()
     override suspend fun getRegisterById(id: Long) = dao.getRegisterById(id)
+
+    override suspend fun fetchNoteAndTagsByTagId(idTag: Long)=dao.fetchNotesAndTagByTagId(idTag)
 }

@@ -18,6 +18,6 @@ interface MainRepository {
     suspend fun deleteRegister(idEntity:Long):Int
     suspend fun getAllRegisters():List<NoteAndTag>
     suspend fun getRegisterById(id:Long):NoteAndTag
-
+    suspend fun fetchNoteAndTagsByTagId(idTag:Long):List<NoteAndTag>
 
 }
