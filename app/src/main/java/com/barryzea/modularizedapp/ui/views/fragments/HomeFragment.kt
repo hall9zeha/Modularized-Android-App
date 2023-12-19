@@ -113,6 +113,7 @@ class HomeFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when(menuItem.itemId){
                     R.id.filterItem->{
+
                         if(isExpanded){ bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED;bind.addFab.hide()}
                         else{bottomSheetBehavior.state=BottomSheetBehavior.STATE_EXPANDED;bind.addFab.show()}
                     }
@@ -121,7 +122,7 @@ class HomeFragment : Fragment() {
                         viewModel.fetchAllRegisters()
                     }
                 }
-                return true
+                return false //al retornar true inhabilitaba el evento del ícono de navegación del toolbar principal
             }
         },viewLifecycleOwner,Lifecycle.State.RESUMED)
     }

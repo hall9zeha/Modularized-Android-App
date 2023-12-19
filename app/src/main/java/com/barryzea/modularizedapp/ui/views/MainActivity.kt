@@ -13,7 +13,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -58,14 +60,19 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
 
         }
     private fun setUpToolbar(){
+
         setSupportActionBar(bind.toolbarMain)
 
     }
     private fun setUpNavigator(){
-
         bind.navView.setupWithNavController(navController)
         NavigationUI.setupWithNavController(bind.navView,navController)
+   }
+
+    override fun onSupportNavigateUp(): Boolean {
+       return NavigationUI.navigateUp(navController,bind.mainDrawerLayout)
     }
+
     private fun changeActionbarTitle(){
         navController.addOnDestinationChangedListener{_, destination,_ ->
             when(destination.id){
@@ -74,16 +81,7 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
             }
         }
     }
-    override fun onSupportNavigateUp(): Boolean {
-        val drawerLayout = bind.mainDrawerLayout
 
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-        return true
-    }
 
     override fun navigateToFlow(flow: NavigationFlow) {
        // navigator.navigateToFlow(flow)
