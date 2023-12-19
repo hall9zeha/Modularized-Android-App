@@ -5,5 +5,10 @@
         android:title=""
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_filter"/>
+    <item android:id="@+id/refreshItem"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_refresh"
+        />
 
 </menu>

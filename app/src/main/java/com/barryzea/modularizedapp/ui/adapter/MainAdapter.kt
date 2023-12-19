@@ -39,6 +39,13 @@ class MainAdapter(private val onItemClick:(NoteAndTag)->Unit, private val onItem
    notifyItemRemoved(index)
   }
  }
+ fun clear(){
+  if(registerList.isNotEmpty()){
+   val size=registerList.size
+   registerList.clear()
+   notifyItemRangeRemoved(0,size)
+  }
+ }
  private fun update(entity:NoteAndTag){
   val index = registerList.indexOf(entity)
   registerList[index] = entity

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply{
             CoroutineScope(Dispatchers.IO).launch {
-                delay(3000)
+                delay(2000)
                 setKeepOnScreenCondition{false}
 
             }

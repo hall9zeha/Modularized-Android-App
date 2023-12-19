@@ -11,4 +11,5 @@
     <string name="bookmark_title">Bookmarks</string>
     <string name="new_note">New note</string>
     <string name="deleted_msg">Deleted</string>
+    <string name="filter_title">Filtrar por marcador</string>
 </resources>

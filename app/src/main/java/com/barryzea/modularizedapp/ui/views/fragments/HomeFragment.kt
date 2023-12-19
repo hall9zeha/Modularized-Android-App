@@ -116,13 +116,17 @@ class HomeFragment : Fragment() {
                         if(isExpanded){ bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED;bind.addFab.hide()}
                         else{bottomSheetBehavior.state=BottomSheetBehavior.STATE_EXPANDED;bind.addFab.show()}
                     }
+                    R.id.refreshItem->{
+                        adapter.clear()
+                        viewModel.fetchAllRegisters()
+                    }
                 }
                 return true
             }
         },viewLifecycleOwner,Lifecycle.State.RESUMED)
     }
     private fun setUpBottomSheet(){
-        bind.bottomSheetBookmark.tvHeader.text="Filtrar por marcador"
+        bind.bottomSheetBookmark.tvHeader.text=getString(R.string.filter_title)
         bind.bottomSheetBookmark.btnAddBookmark.visibility=View.GONE
 
         bottomSheetBehavior = BottomSheetBehavior.from(bind.bottomSheetBookmark.bottomSheet)
@@ -152,6 +156,8 @@ class HomeFragment : Fragment() {
                 if(bookmark.color.isNotEmpty())chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
 
                 setOnClickListener {
+                    adapter.clear()
+                    viewModel.getNoteAndTagByTagId(bookmark.idTag)
                    bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
                 }
             }
@@ -161,8 +167,7 @@ class HomeFragment : Fragment() {
     }
     private fun setUpViewModel(){
         viewModel.fetchAllRegisters()
-        bookmarkViewModel.fetchAllTags()
-        //viewModel.getNoteAndTagByTagId(10)
+
         viewModel.allRegisters.observe(viewLifecycleOwner){
             it?.let {
                 adapter.addAll(it!!)
@@ -182,7 +187,7 @@ class HomeFragment : Fragment() {
         }
         viewModel.noteAndTagByTagId.observe(viewLifecycleOwner){
             it?.let{
-                Log.e("BY-TAG-ID", it.toString() )
+                adapter.addAll(it)
             }
         }
 
@@ -226,6 +231,10 @@ class HomeFragment : Fragment() {
         viewModel.deleteRegister(entity.note.idNote)
     }
 
+    override fun onResume() {
+        super.onResume()
+        bookmarkViewModel.fetchAllTags()
+    }
 
     companion object {
 
