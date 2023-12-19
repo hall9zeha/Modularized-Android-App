@@ -30,11 +30,9 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
     val bookmarkById:SingleMutableLiveData<Tag> get()= _bookmarkById
     private var _bookmarkDeleteRow:SingleMutableLiveData<Int> = SingleMutableLiveData()
     val bookmarkDeleteRow:SingleMutableLiveData<Int> = _bookmarkDeleteRow
-
     init{
         initScope()
     }
-
     fun fetchAllTags(){
         launch{
             _bookmarks.postValue(repository.getAllTags())
