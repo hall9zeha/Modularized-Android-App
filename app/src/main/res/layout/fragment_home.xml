@@ -20,7 +20,7 @@
         android:layout_margin="16dp"
         app:icon="@drawable/ic_add"
         android:text="Agregar"
-
         />
-
+        <include layout="@layout/dialog_list_bookmark"
+            android:id="@+id/bottomSheetBookmark"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

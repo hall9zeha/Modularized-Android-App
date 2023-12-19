@@ -1,5 +1,9 @@
 package com.barryzea.modularizedapp.ui.views.fragments
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,19 +15,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.models.model.Note
 import com.barryzea.models.model.NoteAndTag
 import com.barryzea.core.R
+import com.barryzea.models.model.Tag
 import com.barryzea.modularizedapp.databinding.FragmentHomeBinding
 import com.barryzea.modularizedapp.ui.adapter.MainAdapter
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
+import com.barryzea.modularizedapp.ui.views.MainActivity
 import com.barryzea.modularizedapp.ui.views.NewRegisterDialog
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -37,16 +50,36 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
     private  var _bind:FragmentHomeBinding? = null
     private val viewModel:MainViewModel by viewModels()
+    private val bookmarkViewModel:BookmarkViewModel by viewModels()
     private lateinit var adapter: MainAdapter
     private lateinit var staggeredGrid: StaggeredGridLayoutManager
     private lateinit var entity: NoteAndTag
+
+    private lateinit var bottomSheetBehavior:BottomSheetBehavior<View>
+    private var isExpanded = false
     private val bind:FragmentHomeBinding get() = _bind!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(isExpanded){
+                    bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+                }else{
+                    (activity as? MainActivity)?.handleBackPressed()
+                }
+            }
+        }
+        activity?.onBackPressedDispatcher?.addCallback(onBackPressedCallback)
     }
 
     override fun onCreateView(
@@ -65,9 +98,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpActionBarMenu()
+        setUpBottomSheet()
         setUpAdapter()
         setUpViewModel()
         setUpListeners()
+
     }
     private fun setUpActionBarMenu(){
         val menuHost:MenuHost = requireActivity()
@@ -75,20 +110,58 @@ class HomeFragment : Fragment() {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.main_menu,menu)
             }
-
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when(menuItem.itemId){
                     R.id.filterItem->{
-
+                        if(isExpanded){ bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED;bind.addFab.hide()}
+                        else{bottomSheetBehavior.state=BottomSheetBehavior.STATE_EXPANDED;bind.addFab.show()}
                     }
-
                 }
                 return true
             }
         },viewLifecycleOwner,Lifecycle.State.RESUMED)
     }
+    private fun setUpBottomSheet(){
+        bind.bottomSheetBookmark.tvHeader.text="Filtrar por marcador"
+        bind.bottomSheetBookmark.btnAddBookmark.visibility=View.GONE
+
+        bottomSheetBehavior = BottomSheetBehavior.from(bind.bottomSheetBookmark.bottomSheet)
+        bottomSheetBehavior.state=BottomSheetBehavior.STATE_HIDDEN
+
+        bottomSheetBehavior.addBottomSheetCallback(object:BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when(newState){
+                    BottomSheetBehavior.STATE_EXPANDED ->{isExpanded=true;bind.addFab.hide()}
+                    BottomSheetBehavior.STATE_COLLAPSED->{isExpanded=false;bind.addFab.show()}
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+        })
+    }
+    private fun setUpBookmarksChipGroup(bookmarks:List<Tag>){
+        bind.bottomSheetBookmark.bookmarkChips.removeAllViews()
+        bookmarks.forEach {bookmark->
+            val chip= Chip(context).apply {
+                id = bookmark.idTag.toInt()
+                text=bookmark.description
+                chipStrokeWidth = 3F
+                if(bookmark.color.isNotEmpty())chipStrokeColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
+                if(bookmark.color.isNotEmpty())rippleColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(255)
+                if(bookmark.color.isNotEmpty())chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
+
+                setOnClickListener {
+                   bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
+                }
+            }
+            bind.bottomSheetBookmark.bookmarkChips.addView(chip)
+
+        }
+    }
     private fun setUpViewModel(){
         viewModel.fetchAllRegisters()
+        bookmarkViewModel.fetchAllTags()
         //viewModel.getNoteAndTagByTagId(10)
         viewModel.allRegisters.observe(viewLifecycleOwner){
             it?.let {
@@ -104,11 +177,15 @@ class HomeFragment : Fragment() {
         viewModel.deletedRegisterRow.observe(viewLifecycleOwner){
             adapter.removeItem(entity)
         }
+        bookmarkViewModel.bookmarks.observe(viewLifecycleOwner){
+            it?.let{if(it.isNotEmpty()){setUpBookmarksChipGroup(it)} }
+        }
         viewModel.noteAndTagByTagId.observe(viewLifecycleOwner){
             it?.let{
                 Log.e("BY-TAG-ID", it.toString() )
             }
         }
+
     }
     private fun setUpAdapter(){
         staggeredGrid = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
@@ -148,6 +225,7 @@ class HomeFragment : Fragment() {
         this.entity=entity
         viewModel.deleteRegister(entity.note.idNote)
     }
+
 
     companion object {
 

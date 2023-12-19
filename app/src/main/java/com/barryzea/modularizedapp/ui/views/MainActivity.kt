@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
 
         setUpToolbar()
         setUpNavigator()
-        onBackPressedDispatcher()
         changeActionbarTitle()
+        //onBackPressedDispatcher()
 
         }
     private fun setUpToolbar(){
@@ -88,21 +88,27 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
     override fun navigateToFlow(flow: NavigationFlow) {
        // navigator.navigateToFlow(flow)
     }
+
+    //Función que se utiliza en  fragmentHome al sobresscribir el evento onBackPressed
+    fun handleBackPressed(){
+        if (bind.mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            bind.mainDrawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            val currentDestinationId = navController.currentDestination?.id
+            // Si estamos en el fragmento inicial (HomeFragment), salimos de la actividad
+            if (currentDestinationId == R.id.homeFragment) {
+                finish()
+            } else {
+                // Si estamos en otro fragmento, navegamos hacia atrás
+                navController.navigateUp()
+            }
+        }
+    }
+    //Ya que estamos sobreecribiendo el evento backPressed en fragmentHome no usaremos esta función aquí
     private fun onBackPressedDispatcher(){
         onBackPressedDispatcher.addCallback(this,object :OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
-                if (bind.mainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    bind.mainDrawerLayout.closeDrawer(GravityCompat.START)
-                } else {
-                    val currentDestinationId = navController.currentDestination?.id
-                    // Si estamos en el fragmento inicial (HomeFragment), salimos de la actividad
-                    if (currentDestinationId == R.id.homeFragment) {
-                        finish()
-                    } else {
-                        // Si estamos en otro fragmento, navegamos hacia atrás
-                        navController.navigateUp()
-                    }
-                }
+              handleBackPressed()
             }
         })
     }
