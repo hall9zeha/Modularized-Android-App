@@ -28,4 +28,32 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
     </style>
+
+    <style name="Theme.ModularizedApp" parent="Base.Theme.ModularizedApp" />
+    <style name="myFullScreenDialog" parent="ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Window.Fullscreen">
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:theme">@style/myToolbarDrawerStyle</item>
+    </style>
+    <style name="myToolbarDrawerStyle" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+    <style name="MyDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/white</item>
+    </style>
+    <style name="SplashScreenTheme" parent = "Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/surface</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/notepad_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.ModularizedApp</item>
+    </style>
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <!-- Tint the menu and overflow icons -->
+        <item name="colorControlNormal">#FFFFFF</item><!--Cambiamos el color de los íconos del menu-->
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="titleTextColor">#FFFFFF</item>
+        <item name="navigationIconTint">#FFFFFF</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorControlHighlight">@color/md_theme_dark_error</item>
+
+    </style>
 </resources>

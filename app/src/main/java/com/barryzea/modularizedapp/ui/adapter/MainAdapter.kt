@@ -26,8 +26,8 @@ class MainAdapter(private val onItemClick:(NoteAndTag)->Unit, private val onItem
  }
  fun addItem(entity:NoteAndTag){
   if(!registerList.contains(entity)){
-   registerList.add(entity)
-   notifyItemInserted(registerList.size -1)
+   registerList.add(0,entity)
+   notifyItemInserted(0)
   }else{
    update(entity)
   }
