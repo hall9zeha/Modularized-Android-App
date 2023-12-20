@@ -45,4 +45,18 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/notepad_icon</item>
         <item name="postSplashScreenTheme">@style/Theme.ModularizedApp</item>
     </style>
+
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <!-- Tint the menu and overflow icons -->
+        <item name="colorControlNormal">#FFFFFF</item><!--Cambiamos el color de los íconos del menu-->
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="titleTextColor">#FFFFFF</item>
+        <item name="navigationIconTint">#FFFFFF</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorControlHighlight">@color/md_theme_dark_error</item>
+
+    </style>
+
+
 </resources>

@@ -21,9 +21,9 @@
         tools:title="Modulos"
         android:background="?attr/colorPrimaryDark"
         android:fitsSystemWindows="true"
-        app:titleTextColor="@color/white"
-        app:navigationIconTint="@color/white"
         app:navigationIcon="@drawable/ic_dehace"
+        app:theme="@style/ThemeOverlay.App.Toolbar"
+
         />
 
     <fragment
