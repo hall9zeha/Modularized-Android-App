@@ -12,4 +12,5 @@
     <string name="new_note">Nueva nota</string>
     <string name="deleted_msg">Eliminado</string>
     <string name="filter_title">Filtrar por marcador</string>
+    <string name="edit_note">Editando nota</string>
 </resources>

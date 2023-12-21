@@ -79,7 +79,7 @@ class NewRegisterDialog: DialogFragment(){
                 b.toolbarDetail.setNavigationOnClickListener {
                    maintenanceRegister()
                 }
-                b.toolbarDetail.title = getString(R.string.new_note)
+
                 return b.root
             }
         }
@@ -134,15 +134,16 @@ class NewRegisterDialog: DialogFragment(){
     private fun getIntentExtras(){
        arguments?.let {
             entity = it.getParcelable(EXTRA_KEY)!!
-            setUpDetail(entity!!.note)
             entity?.tags?.forEach {bookmark->
                 addBookmark(bookmark,false)
             }
-            isNewRegister=false
-        }
+           isNewRegister=false
+       }
+      setUpDetail(entity?.note)
     }
-    private fun setUpDetail(entity: Note){
-        bind.tvContent.setText(entity.description)
+    private fun setUpDetail(entity: Note?){
+        entity?.let{bind.tvContent.setText(entity.description)}
+        bind.toolbarDetail.title = if(isNewRegister) getString(R.string.new_note) else getString(R.string.edit_note)
     }
     private fun setUpObservers(){
         bookmarkViewModel.fetchAllTags()
