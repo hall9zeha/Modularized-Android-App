@@ -10,6 +10,7 @@ androidxTestCore = "1.5.0"
 application = "8.1.1"
 core-ktx = "1.9.0"
 constraint-layout-version = "2.1.4"
+data-store-version="1.0.0"
 fragment = "1.6.2"
 flex-box-version ="3.0.0"
 hilt = "2.48.1"
@@ -18,6 +19,7 @@ junit = "4.13.2"
 kotlinxCoroutines = "1.7.3"
 kotlin = "1.9.0"
 library = "8.1.1"
+lottie-version = "3.4.1"
 material-version = "1.10.0"
 nav-version="2.5.3"
 parcelize = "1.8.10"
@@ -29,6 +31,7 @@ room = "2.6.0"
 splash="1.0.1"
 safe-args-version ="2.5.0"
 viewmodel-version = "2.6.1"
+viewpager2-version = "1.0.0"
 color-picker-version = "2.3.0"
 
 
@@ -39,10 +42,12 @@ androidx-test-runner = { group = "androidx.test", name = "runner", version.ref =
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
 androidx-constraintlayout = {group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraint-layout-version"}
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+data-store = {group = "androidx.datastore", name="datastore-preferences", version.ref="data-store-version"}
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 flex-box = {group = "com.google.android.flexbox", name = "flexbox", version.ref = "flex-box-version"}
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+lottie-anim = {group ="com.airbnb.android", name = "lottie", version.ref = "lottie-version"}
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -65,7 +70,7 @@ robolectric-shadows = { group = "org.robolectric", name = "shadows-framework", v
 roborazzi = { group = "io.github.takahirom.roborazzi", name = "roborazzi", version.ref = "roborazzi" }
 splash-screen = {group = "androidx.core", name = "core-splashscreen", version.ref = "splash"}
 viewmodel = {group = "androidx.lifecycle", name = "lifecycle-viewmodel",version.ref = "viewmodel-version"}
-
+viewpager2 = {group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2-version"}
 #Color picker catalog
 color-picker = {group = "com.github.skydoves", name = "colorpickerview", version.ref = "color-picker-version"}
 
