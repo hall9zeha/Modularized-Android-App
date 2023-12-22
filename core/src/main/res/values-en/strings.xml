@@ -13,4 +13,6 @@
     <string name="deleted_msg">Deleted</string>
     <string name="filter_title">Filtrar por marcador</string>
     <string name="edit_note">Editando nota</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
 </resources>
