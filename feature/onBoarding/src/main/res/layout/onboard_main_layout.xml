@@ -16,6 +16,7 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/onBoardTab"
         android:layout_gravity="bottom"
         android:background="@color/white"
         app:tabBackground="@drawable/tab_selector"
