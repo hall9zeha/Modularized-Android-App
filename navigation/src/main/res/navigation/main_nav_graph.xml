@@ -4,6 +4,7 @@
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/home_flow"
     >
+    <include app:graph ="@navigation/on_board_flow"/>
     <include app:graph ="@navigation/home_flow"/>
     <include app:graph ="@navigation/bookmark_flow"/>
 

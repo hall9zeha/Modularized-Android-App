@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/on_board_flow"
+    app:startDestination="@id/onboardFragment"
+    >
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="com.barryzea.onboarding.ui.OnBoardFragment"/>
+</navigation>

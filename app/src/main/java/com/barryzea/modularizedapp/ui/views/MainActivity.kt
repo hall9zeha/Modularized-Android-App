@@ -3,6 +3,7 @@ package com.barryzea.modularizedapp.ui.views
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -64,8 +65,12 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         setSupportActionBar(bind.toolbarMain)
     }
     private fun setUpNavigator(){
+
         bind.navView.setupWithNavController(navController)
+        //navController.graph.setStartDestination(com.barryzea.onboarding.R.id.onboardFragment)
         NavigationUI.setupWithNavController(bind.navView,navController)
+        navController.navigate(com.barryzea.navigation.R.id.on_board_flow)
+
     }
     override fun onSupportNavigateUp(): Boolean {
         val drawerLayout = bind.mainDrawerLayout
@@ -79,8 +84,9 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
     private fun changeActionbarTitle(){
         navController.addOnDestinationChangedListener{_, destination,_ ->
             when(destination.id){
-               R.id.homeFragment -> supportActionBar?.title= "Home"
-                com.barryzea.bookmark.R.id.bookmarkFragment->supportActionBar?.title = "Bookmarks"
+                R.id.homeFragment -> {supportActionBar?.title = "Home";bind.toolbarMain.visibility = View.VISIBLE}
+                com.barryzea.bookmark.R.id.bookmarkFragment ->{ supportActionBar?.title = "Bookmarks";bind.toolbarMain.visibility = View.VISIBLE}
+                com.barryzea.onboarding.R.id.onboardFragment->{bind.toolbarMain.visibility = View.GONE}
             }
         }
     }

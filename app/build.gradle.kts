@@ -73,6 +73,7 @@ dependencies {
     implementation(project(":abstraction"))
     implementation(project(":feature"))
     implementation(project(":feature:bookmark"))
+    implementation(project(":feature:onBoarding"))
     implementation(project(":navigation"))
     implementation(project(":test"))
 
