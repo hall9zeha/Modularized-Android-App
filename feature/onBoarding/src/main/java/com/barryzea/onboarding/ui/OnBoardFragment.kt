@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -23,6 +24,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 class OnBoardFragment: Fragment() {
     private var _bind:OnboardMainLayoutBinding? = null
     private val bind:OnboardMainLayoutBinding get() = _bind!!
+    private val onBackPressedCallback = object:OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            activity?.finish()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +49,7 @@ class OnBoardFragment: Fragment() {
         bind.viewPagerMain.adapter = OnBoardAdapter()
         TabLayoutMediator(bind.onBoardTab,bind.viewPagerMain){tab,position->}.attach()
         setUpListeners()
+        activity?.onBackPressedDispatcher?.addCallback(onBackPressedCallback)
     }
     private fun setUpListeners(){
         bind.viewPagerMain.registerOnPageChangeCallback(object:ViewPager2.OnPageChangeCallback(){
@@ -51,9 +58,11 @@ class OnBoardFragment: Fragment() {
                 updateContentButtons(position)
             }
         })
-        bind.btnSkip.setOnClickListener { findNavController().navigateUp() }
+        bind.btnSkip.setOnClickListener {
+
+            findNavController().navigate(com.barryzea.navigation.R.id.home_flow)}
         bind.btnNext.setOnClickListener {
-            if(bind.btnNext.text.toString()==getString(R.string.get_started))findNavController().navigateUp()
+            if(bind.btnNext.text.toString()==getString(R.string.get_started))findNavController().navigate(com.barryzea.navigation.R.id.home_flow)
             else{
                 val currentPage= (bind.viewPagerMain.currentItem) + 1
                 bind.viewPagerMain.currentItem = currentPage
@@ -70,4 +79,5 @@ class OnBoardFragment: Fragment() {
             bind.btnNext.contentDescription = getString(R.string.next)
         }
     }
+
 }

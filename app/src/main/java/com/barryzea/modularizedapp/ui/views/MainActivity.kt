@@ -12,8 +12,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -40,7 +42,6 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity(),ToFlowNavigatable {
     private lateinit var bind:ActivityMainBinding
     private val navController: NavController by lazy{ Navigation.findNavController(this, R.id.nav_host_fragment)}
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply{
@@ -53,7 +54,6 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
 
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
-
         setUpToolbar()
         setUpNavigator()
         changeActionbarTitle()
@@ -65,11 +65,16 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         setSupportActionBar(bind.toolbarMain)
     }
     private fun setUpNavigator(){
+        //Si es la primera vez que se abre la app mostramos las panatallas de on boarding, cambiando el el destino de inicio
+        //del gráfico de navegación por el de onboardFragment
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        val navGraph:NavGraph = navController.navInflater.inflate(com.barryzea.navigation.R.navigation.main_nav_graph)
+        navGraph.setStartDestination(com.barryzea.navigation.R.id.on_board_flow)
+        navController.graph=navGraph
+
 
         bind.navView.setupWithNavController(navController)
-        //navController.graph.setStartDestination(com.barryzea.onboarding.R.id.onboardFragment)
         NavigationUI.setupWithNavController(bind.navView,navController)
-        navController.navigate(com.barryzea.navigation.R.id.on_board_flow)
 
     }
     override fun onSupportNavigateUp(): Boolean {
