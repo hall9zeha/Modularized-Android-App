@@ -1,4 +1,4 @@
-package com.barryzea.models.model
+package com.barryzea.core.entities
 
 
 /****

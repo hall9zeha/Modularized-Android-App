@@ -1,5 +1,6 @@
 package com.barryzea.modularizedapp.ui.viewmodel
 
+import com.barryzea.core.common.DataStorePreferences
 import com.barryzea.data.repository.MainRepositoryImpl
 
 import com.barryzea.models.model.Note
@@ -18,7 +19,7 @@ import javax.inject.Inject
  **/
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: MainRepositoryImpl): ScopedViewModel() {
+class MainViewModel @Inject constructor(private val repository: MainRepositoryImpl, private val dataStore:DataStorePreferences): ScopedViewModel() {
     private var _allRegisters:SingleMutableLiveData<List<NoteAndTag>> = SingleMutableLiveData()
     val allRegisters:SingleMutableLiveData<List<NoteAndTag>> = _allRegisters
 
@@ -40,8 +41,12 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
     private var _registerId:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val registerId:SingleMutableLiveData<Long> = _registerId
 
+    private val _onBoardingCompleted:SingleMutableLiveData<Boolean> = SingleMutableLiveData()
+    val onBoardingCompleted:SingleMutableLiveData<Boolean> = _onBoardingCompleted
+
     init {
         initScope()
+        getDataStorePreferences()
     }
     fun fetchAllRegisters(){
         launch {_allRegisters.value =repository.getAllRegisters()}
@@ -64,7 +69,13 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
     fun setRegisterId(id:Long){
        launch {  _registerId.value = id}
     }
-
+    private fun getDataStorePreferences(){
+        launch{
+            dataStore.getFromDataStore().collect{
+                _onBoardingCompleted.value = it.completedOnboarding
+            }
+        }
+    }
     override fun onCleared() {
         destroyScope()
         super.onCleared()

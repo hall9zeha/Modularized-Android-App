@@ -26,11 +26,6 @@ private const val MY_DATABASE_NAME = "MyDatabase"
 @Module
 @InstallIn(SingletonComponent::class)
 class MainModule{
-
-    @Singleton
-    @Provides
-    fun contextProvides(app: Application):Context = app.applicationContext
-
     @Provides
     @Singleton
     fun databaseProvides(app:Application)= Room.databaseBuilder(app.applicationContext,

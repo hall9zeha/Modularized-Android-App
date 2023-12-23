@@ -2,36 +2,21 @@ package com.barryzea.modularizedapp.ui.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.barryzea.models.model.Note
 import com.barryzea.modularizedapp.R
 import com.barryzea.modularizedapp.databinding.ActivityMainBinding
-import com.barryzea.modularizedapp.ui.adapter.MainAdapter
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
-import com.barryzea.modularizedapp.ui.views.fragments.HomeFragment
 import com.barryzea.navigation.NavigationFlow
-import com.barryzea.navigation.Navigator
 import com.barryzea.navigation.ToFlowNavigatable
-import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +26,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),ToFlowNavigatable {
     private lateinit var bind:ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
     private val navController: NavController by lazy{ Navigation.findNavController(this, R.id.nav_host_fragment)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,27 +41,35 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         setUpToolbar()
-        setUpNavigator()
+        setUpObservers()
+        //setUpNavigator()
         changeActionbarTitle()
         //onBackPressedDispatcher()
 
         }
     private fun setUpToolbar(){
-
         setSupportActionBar(bind.toolbarMain)
     }
-    private fun setUpNavigator(){
+    private fun setUpObservers(){
+        viewModel.onBoardingCompleted.observe(this){onBoardingCompleted->
+            setUpNavigator(onBoardingCompleted)
+        }
+    }
+    private fun setUpNavigator(onBoardingCompleted: Boolean?) {
         //Si es la primera vez que se abre la app mostramos las panatallas de on boarding, cambiando el el destino de inicio
         //del gráfico de navegación por el de onboardFragment
-        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        val navGraph:NavGraph = navController.navInflater.inflate(com.barryzea.navigation.R.navigation.main_nav_graph)
-        navGraph.setStartDestination(com.barryzea.navigation.R.id.on_board_flow)
-        navController.graph=navGraph
-
-
-        bind.navView.setupWithNavController(navController)
-        NavigationUI.setupWithNavController(bind.navView,navController)
-
+       // val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        if(!onBoardingCompleted!!) {
+            val navGraph: NavGraph =
+                navController.navInflater.inflate(com.barryzea.navigation.R.navigation.main_nav_graph)
+            navGraph.setStartDestination(com.barryzea.navigation.R.id.on_board_flow)
+            navController.graph = navGraph
+            bind.navView.setupWithNavController(navController)
+            NavigationUI.setupWithNavController(bind.navView, navController)
+        }else{
+            bind.navView.setupWithNavController(navController)
+            NavigationUI.setupWithNavController(bind.navView, navController)
+        }
     }
     override fun onSupportNavigateUp(): Boolean {
         val drawerLayout = bind.mainDrawerLayout

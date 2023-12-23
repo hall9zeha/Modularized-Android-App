@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.library)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kapt)
 }
 
 android{
@@ -27,7 +28,13 @@ dependencies{
     implementation(libs.livedata)
     //Splash screen
     implementation(libs.splash.screen)
+    //Data store preferences
+    implementation(libs.data.store)
+    //Dagger hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    //modules
     implementation(project(":navigation"))
-    implementation(project(":data"))
-    implementation(project(":domain:models"))
+
+
 }

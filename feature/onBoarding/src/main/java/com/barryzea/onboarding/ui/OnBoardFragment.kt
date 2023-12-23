@@ -6,13 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.barryzea.core.R
+import com.barryzea.core.common.DataStorePreferences
+import com.barryzea.core.entities.PrefsEntity
 import com.barryzea.onboarding.adapter.MAX_STEP
 import com.barryzea.onboarding.adapter.OnBoardAdapter
 import com.barryzea.onboarding.databinding.OnboardMainLayoutBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 /****
@@ -21,8 +27,11 @@ import com.google.android.material.tabs.TabLayoutMediator
  * Copyright (c)  All rights reserved.
  ***/
 
+@AndroidEntryPoint
 class OnBoardFragment: Fragment() {
     private var _bind:OnboardMainLayoutBinding? = null
+    @Inject
+    lateinit var dataStore:DataStorePreferences
     private val bind:OnboardMainLayoutBinding get() = _bind!!
     private val onBackPressedCallback = object:OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
@@ -80,4 +89,11 @@ class OnBoardFragment: Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        lifecycleScope.launch {
+            dataStore.saveToDataStore(PrefsEntity(completedOnboarding = true))
+        }
+        _bind = null
+    }
 }
