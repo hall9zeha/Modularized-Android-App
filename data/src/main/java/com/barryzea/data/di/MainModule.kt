@@ -1,6 +1,7 @@
 package com.barryzea.data.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.barryzea.abstraction.MainRepository
 import com.barryzea.abstraction.TagRepository
@@ -25,6 +26,11 @@ private const val MY_DATABASE_NAME = "MyDatabase"
 @Module
 @InstallIn(SingletonComponent::class)
 class MainModule{
+
+    @Singleton
+    @Provides
+    fun contextProvides(app: Application):Context = app.applicationContext
+
     @Provides
     @Singleton
     fun databaseProvides(app:Application)= Room.databaseBuilder(app.applicationContext,

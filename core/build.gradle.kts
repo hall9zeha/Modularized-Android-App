@@ -28,4 +28,6 @@ dependencies{
     //Splash screen
     implementation(libs.splash.screen)
     implementation(project(":navigation"))
+    implementation(project(":data"))
+    implementation(project(":domain:models"))
 }
