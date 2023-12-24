@@ -4,6 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.barryzea.core.common.loadUrl
+import com.barryzea.onboarding.R
+import com.barryzea.core.R as coreRes
 import com.barryzea.onboarding.databinding.OnboardDesignBinding
 
 
@@ -22,17 +25,19 @@ class OnBoardAdapter: RecyclerView.Adapter<PagerViewHolder>() {
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) = holder.itemView.run{
         with(holder.bind){
             if(position==0){
-                tvOnBoardTitle.text= "Título primero"
+                tvOnBoardTitle.text= context.getString(coreRes.string.first_screen_sample_title)
                 tvOnBoardContent.text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. "
+                ivOnboardMain.loadUrl(coreRes.drawable.onboard_screen1)
             }
             if(position ==1){
-                tvOnBoardTitle.text="Título segundo"
+                tvOnBoardTitle.text= context.getString(coreRes.string.second_screen_sample_title)
                 tvOnBoardContent.text = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. "
+                ivOnboardMain.loadUrl(coreRes.drawable.onboard_screen2)
             }
             if(position == 2){
-                tvOnBoardTitle.text="Título tercero"
+                tvOnBoardTitle.text= context.getString(coreRes.string.third_screen_sample_title)
                 tvOnBoardContent.text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. "
-
+                ivOnboardMain.loadUrl(coreRes.drawable.onboard_screen3)
             }
         }
     }

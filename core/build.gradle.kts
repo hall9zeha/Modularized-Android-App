@@ -33,6 +33,9 @@ dependencies{
     //Dagger hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    //Glide
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
     //modules
     implementation(project(":navigation"))
 
