@@ -3,12 +3,12 @@ package com.barryzea.onboarding.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.core.common.loadUrl
 import com.barryzea.onboarding.R
 import com.barryzea.core.R as coreRes
 import com.barryzea.onboarding.databinding.OnboardDesignBinding
-
 
 /****
  * Project ModularizedApp
@@ -17,12 +17,13 @@ import com.barryzea.onboarding.databinding.OnboardDesignBinding
  ***/
 const val MAX_STEP=3
 class OnBoardAdapter: RecyclerView.Adapter<PagerViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
         return PagerViewHolder(OnboardDesignBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-
     }
-
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) = holder.itemView.run{
+        val animation = AnimationUtils.loadAnimation(holder.bind.root.context, coreRes.anim.animation_item_onboarding)
+        holder.itemView.startAnimation(animation)
         with(holder.bind){
             if(position==0){
                 tvOnBoardTitle.text= context.getString(coreRes.string.first_screen_sample_title)
@@ -41,7 +42,6 @@ class OnBoardAdapter: RecyclerView.Adapter<PagerViewHolder>() {
             }
         }
     }
-
     override fun getItemCount() = MAX_STEP
 }
 class PagerViewHolder(val bind: OnboardDesignBinding):RecyclerView.ViewHolder(bind.root)
