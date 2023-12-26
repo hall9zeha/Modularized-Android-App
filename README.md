@@ -2,7 +2,7 @@
 Aplicación sencilla de bloc de notas que usa una arquitectura de modularizacion con Android kotlin 
 
 ## Módulos :card_file_box:
-
+* Abstraction
 * App
 * Core
 * Data
@@ -21,7 +21,7 @@ Aplicación sencilla de bloc de notas que usa una arquitectura de modularizacion
 ![Badge Terminado](https://img.shields.io/badge/STATUS-%20TERMINADO-green)
 ## Se utilizó :wrench:
 El proyecto usa un catalogo central de versiones en el cual se van agregando las dependencias que se requieran y se comparte a los diferentes módulos, mejorando la escalabilidad y el mantenimiento del mismo.
-
+[catalog versions file](https://github.com/hall9zeha/Modularized-Android-App/blob/main/gradle/libs.versions.toml)
 * [Arquitectura MVVM](https://developer.android.com/jetpack/guide)
 * [Clean code](https://developer.android.com/topic/architecture)
 
