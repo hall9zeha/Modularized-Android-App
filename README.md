@@ -1,4 +1,6 @@
 # Modularized-Android-App
+<img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/core/src/main/ic_launcher-playstore.png"  alt="drawing" width="40%" height="40%"/>
+
 Aplicación sencilla de bloc de notas que usa una arquitectura de modularizacion con Android kotlin 
 
 ## Módulos :card_file_box:
