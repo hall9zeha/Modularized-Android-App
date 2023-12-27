@@ -50,7 +50,7 @@ Algunas librerías usadas en el proyecto:
 * Adjuntar marcadores a nota
 * Filtrar notas por marcadores
 ## Capturas :framed_picture:
-
+|on boarding|||
 ||||
 |--|--|--|
 |<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen1.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen2.jpg" alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen3.jpg"  alt="drawing" width="70%" height="70%"/></p>
