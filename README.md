@@ -51,4 +51,9 @@ Algunas librerías usadas en el proyecto:
 * Filtrar notas por marcadores
 ## Capturas :framed_picture:
 
+||||
+|--|--|--|
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/gif1.gif"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen0.jpg" alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen1.jpg"  alt="drawing" width="70%" height="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen4.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen5.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen6.jpg"  alt="drawing" width="70%" height="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen7.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen8.jpg"  alt="drawing" width="70%" height="70%"/></p>|
 
