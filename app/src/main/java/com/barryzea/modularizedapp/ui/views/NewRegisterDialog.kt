@@ -1,6 +1,7 @@
 package com.barryzea.modularizedapp.ui.views
 
 import android.app.Dialog
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.DialogFragment
@@ -111,6 +113,9 @@ class NewRegisterDialog: DialogFragment(){
        bind.toolbarDetail.setOnMenuItemClickListener {
            when(it.itemId){
                R.id.itemTag-> {
+                   //Ocultamos el teclado si está activo
+                   val inputMethodManager = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                   inputMethodManager.hideSoftInputFromWindow(view?.windowToken,0)
                    if(isExpanded) bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
                    else bottomSheetBehavior.state=BottomSheetBehavior.STATE_EXPANDED
 
@@ -187,6 +192,7 @@ class NewRegisterDialog: DialogFragment(){
         bind.bottomSheetListBookmark.tvHeader.text = getString(R.string.bookmark_title)
         bottomSheetBehavior = BottomSheetBehavior.from(bind.bottomSheetListBookmark.bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
 
         bottomSheetBehavior.addBottomSheetCallback(object:BottomSheetBehavior.BottomSheetCallback(){
             override fun onStateChanged(bottomSheet: View, newState: Int) {
