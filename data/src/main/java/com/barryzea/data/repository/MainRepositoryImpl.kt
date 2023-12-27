@@ -4,6 +4,7 @@ import com.barryzea.abstraction.MainRepository
 import com.barryzea.data.database.db.MyDatabase
 import com.barryzea.models.model.Note
 import com.barryzea.models.model.NoteAndTag
+import com.barryzea.models.model.NoteTagCrossRef
 import javax.inject.Inject
 
 
@@ -26,4 +27,7 @@ class MainRepositoryImpl @Inject constructor(database: MyDatabase): MainReposito
     override suspend fun getRegisterById(id: Long) = dao.getRegisterById(id)
 
     override suspend fun fetchNoteAndTagsByTagId(idTag: Long)=dao.fetchNotesAndTagByTagId(idTag)
+    override suspend fun saveNoteTagCrossRef(noteJoinTag: NoteTagCrossRef)=dao.saveNoteTagCrossRef(noteJoinTag)
+
+    override suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef)=dao.deleteNoteTagCrossRef(noteJoinTag)
 }

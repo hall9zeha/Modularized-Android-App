@@ -176,9 +176,12 @@ class HomeFragment : Fragment() {
         }
         viewModel.registerId.observe(viewLifecycleOwner){
             viewModel.getRegisterById(it!!)
+
         }
         viewModel.entity.observe(viewLifecycleOwner){
-            it?.let{ adapter.addItem(it) }
+            it?.let{ adapter.addItem(it)
+                bind.rvNotes.smoothScrollToPosition(0)
+            }
         }
         viewModel.deletedRegisterRow.observe(viewLifecycleOwner){
             adapter.removeItem(entity)

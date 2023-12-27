@@ -148,18 +148,18 @@ class NewRegisterDialog: DialogFragment(){
     private fun setUpObservers(){
         bookmarkViewModel.fetchAllTags()
         viewModel.idOfRegisterInserted.observe(this){idNote->
-            viewModel.setRegisterId(idNote!!)
             if(bookmarkByNote.isNotEmpty()){
                 bookmarkByNote.forEach {idBookmark->
-                    bookmarkViewModel.saveNoteJoinTag(NoteTagCrossRef(idJoinNote = idNote, idJoinTag = idBookmark))
+                   viewModel.saveNoteJoinTag(NoteTagCrossRef(idJoinNote = idNote!!, idJoinTag = idBookmark))
                 }
             }
+            viewModel.setRegisterId(idNote!!)
             dismiss()
         }
         viewModel.updatedRegisterRow.observe(this){
             if(bookmarkByNote.isNotEmpty()){
                 bookmarkByNote.forEach { idBookmark->
-                    bookmarkViewModel.saveNoteJoinTag(NoteTagCrossRef(idJoinNote = entity!!.note.idNote, idJoinTag = idBookmark )) }
+                    viewModel.saveNoteJoinTag(NoteTagCrossRef(idJoinNote = entity!!.note.idNote, idJoinTag = idBookmark )) }
             }
             viewModel.setRegisterId(entity!!.note.idNote)
             dismiss()
@@ -175,7 +175,7 @@ class NewRegisterDialog: DialogFragment(){
         bookmarkViewModel.bookmarks.observe(this){
             it?.let{setUpBookmarksChipGroup(it)}
         }
-        bookmarkViewModel.bookmarkDeleteRow.observe(this){
+        viewModel.bookmarkDeleteRow.observe(this){
             it?.let{row->
                 if(row>0) Toast.makeText(context,
                     getString(R.string.deleted_msg), Toast.LENGTH_SHORT).show()
@@ -233,7 +233,7 @@ class NewRegisterDialog: DialogFragment(){
             chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
             text = bookmark.description
             setOnLongClickListener {chip->
-                bookmarkViewModel.deleteNoteTagCrossRef(NoteTagCrossRef(idJoinNote = entity?.note?.idNote!!, idJoinTag = bookmark.idTag))
+                viewModel.deleteNoteTagCrossRef(NoteTagCrossRef(idJoinNote = entity?.note?.idNote!!, idJoinTag = bookmark.idTag))
                 bind.chipGroupTags.removeView(chip)
                 true
             }

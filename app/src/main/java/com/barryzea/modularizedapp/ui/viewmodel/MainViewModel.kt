@@ -5,6 +5,7 @@ import com.barryzea.data.repository.MainRepositoryImpl
 
 import com.barryzea.models.model.Note
 import com.barryzea.models.model.NoteAndTag
+import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.modularizedapp.ui.common.ScopedViewModel
 import com.barryzea.modularizedapp.ui.common.SingleMutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,6 +45,8 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
     private val _onBoardingCompleted:SingleMutableLiveData<Boolean> = SingleMutableLiveData()
     val onBoardingCompleted:SingleMutableLiveData<Boolean> = _onBoardingCompleted
 
+    private var _bookmarkDeleteRow:SingleMutableLiveData<Int> = SingleMutableLiveData()
+    val bookmarkDeleteRow:SingleMutableLiveData<Int> = _bookmarkDeleteRow
     init {
         initScope()
         getDataStorePreferences()
@@ -68,6 +71,12 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
     }
     fun setRegisterId(id:Long){
        launch {  _registerId.value = id}
+    }
+    fun saveNoteJoinTag(noteJoinTag: NoteTagCrossRef){
+        launch { repository.saveNoteTagCrossRef(noteJoinTag) }
+    }
+    fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef){
+        launch{_bookmarkDeleteRow.value=repository.deleteNoteTagCrossRef(noteJoinTag)}
     }
     private fun getDataStorePreferences(){
         launch{

@@ -2,6 +2,7 @@ package com.barryzea.abstraction
 
 import com.barryzea.models.model.Note
 import com.barryzea.models.model.NoteAndTag
+import com.barryzea.models.model.NoteTagCrossRef
 import com.barryzea.models.model.Tag
 
 
@@ -19,5 +20,7 @@ interface MainRepository {
     suspend fun getAllRegisters():List<NoteAndTag>
     suspend fun getRegisterById(id:Long):NoteAndTag
     suspend fun fetchNoteAndTagsByTagId(idTag:Long):List<NoteAndTag>
+    suspend fun saveNoteTagCrossRef(noteJoinTag: NoteTagCrossRef):Long
+    suspend fun deleteNoteTagCrossRef(noteJoinTag: NoteTagCrossRef):Int
 
 }
