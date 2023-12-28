@@ -11,8 +11,8 @@ import androidx.lifecycle.Observer
  * Copyright (c)  All rights reserved.
  **/
 
-class SingleMutableLiveData<T>:MutableLiveData<T?>() {
- override fun observe(owner: LifecycleOwner, observer: Observer<in T?>) {
+class SingleMutableLiveData<T>:MutableLiveData<T>() {
+ override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
   super.observe(owner, Observer{t->
     if(t !=null){
      observer.onChanged(t)

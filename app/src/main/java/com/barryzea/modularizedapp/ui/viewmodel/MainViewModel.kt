@@ -21,14 +21,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MainRepositoryImpl, private val dataStore:DataStorePreferences): ScopedViewModel() {
-    private var _allRegisters:SingleMutableLiveData<List<NoteAndTag>> = SingleMutableLiveData()
-    val allRegisters:SingleMutableLiveData<List<NoteAndTag>> = _allRegisters
+    private var _allRegisters:SingleMutableLiveData<List<NoteAndTag>?> = SingleMutableLiveData()
+    val allRegisters:SingleMutableLiveData<List<NoteAndTag>?> = _allRegisters
 
-    private var _entity:SingleMutableLiveData<NoteAndTag> = SingleMutableLiveData()
-    val entity:SingleMutableLiveData<NoteAndTag> = _entity
+    private var _entity:SingleMutableLiveData<NoteAndTag?> = SingleMutableLiveData()
+    val entity:SingleMutableLiveData<NoteAndTag?> = _entity
 
-    private var _noteAndTagByTagId:SingleMutableLiveData<List<NoteAndTag>> = SingleMutableLiveData()
-    val noteAndTagByTagId:SingleMutableLiveData<List<NoteAndTag>> = _noteAndTagByTagId
+    private var _noteAndTagByTagId:SingleMutableLiveData<List<NoteAndTag>?> = SingleMutableLiveData()
+    val noteAndTagByTagId:SingleMutableLiveData<List<NoteAndTag>?> = _noteAndTagByTagId
 
     private var _idOfRegisterInserted:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val idOfRegisterInserted:SingleMutableLiveData<Long> = _idOfRegisterInserted
@@ -36,8 +36,8 @@ class MainViewModel @Inject constructor(private val repository: MainRepositoryIm
     private var _updatedRegisterRow:SingleMutableLiveData<Int> = SingleMutableLiveData()
     val updatedRegisterRow:SingleMutableLiveData<Int> = _updatedRegisterRow
 
-    private var _deletedRegisterRow:SingleMutableLiveData<Int> = SingleMutableLiveData()
-    val deletedRegisterRow:SingleMutableLiveData<Int> = _deletedRegisterRow
+    private var _deletedRegisterRow:SingleMutableLiveData<Int?> = SingleMutableLiveData()
+    val deletedRegisterRow:SingleMutableLiveData<Int?> = _deletedRegisterRow
 
     private var _registerId:SingleMutableLiveData<Long> = SingleMutableLiveData()
     val registerId:SingleMutableLiveData<Long> = _registerId

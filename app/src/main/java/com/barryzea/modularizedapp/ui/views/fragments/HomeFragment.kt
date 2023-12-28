@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var bottomSheetBehavior:BottomSheetBehavior<View>
     private var isExpanded = false
+    private var idItemSelected:Long?=null
     private val bind:FragmentHomeBinding get() = _bind!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -175,16 +176,20 @@ class HomeFragment : Fragment() {
             }
         }
         viewModel.registerId.observe(viewLifecycleOwner){
-            viewModel.getRegisterById(it!!)
+            it?.let{viewModel.getRegisterById(it!!)}
 
         }
         viewModel.entity.observe(viewLifecycleOwner){
             it?.let{ adapter.addItem(it)
-                bind.rvNotes.smoothScrollToPosition(0)
+                //Solo si es un nuevo registro que será diferente del id si este fuera seleccionado al hacer click para abrir su detalle
+                //se moverá al primer índice de la lista donde será insertado
+                idItemSelected?.let {idItemSelected->
+                    if(idItemSelected != it.note.idNote)bind.rvNotes.smoothScrollToPosition(0)
+                }
             }
         }
         viewModel.deletedRegisterRow.observe(viewLifecycleOwner){
-            adapter.removeItem(entity)
+            it?.let{adapter.removeItem(entity)}
         }
         bookmarkViewModel.bookmarks.observe(viewLifecycleOwner){
             it?.let{if(it.isNotEmpty()){setUpBookmarksChipGroup(it)} }
@@ -227,6 +232,7 @@ class HomeFragment : Fragment() {
         }
     }
     private fun onItemClick(entity:NoteAndTag){
+        idItemSelected=entity.note.idNote
         NewRegisterDialog.newInstance(entity).show(childFragmentManager.beginTransaction(),
             NewRegisterDialog::class.java.simpleName)
     }
