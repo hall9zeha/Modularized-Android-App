@@ -25,6 +25,7 @@ dependencies{
     api(libs.kotlinx.coroutines.test)
     api(libs.robolectric.shadows)
     api(libs.robolectric)
+    api(libs.auto.service)
 
     implementation(project(":domain:models"))
 

@@ -8,6 +8,7 @@ androidxTestRules = "1.5.0"
 androidxTestRunner = "1.5.2"
 androidxTestCore = "1.5.0"
 application = "8.1.1"
+auto-service-version = "1.1.1"
 core-ktx = "1.9.0"
 constraint-layout-version = "2.1.4"
 data-store-version="1.0.0"
@@ -27,7 +28,7 @@ nav-version="2.5.3"
 parcelize = "1.8.10"
 retrofit = "2.9.0"
 retrofitKotlinxSerializationJson = "1.0.0"
-robolectric = "4.10.3"
+robolectric = "4.11.1"
 roborazzi = "1.6.0"
 room = "2.6.0"
 splash="1.0.1"
@@ -43,6 +44,7 @@ androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
 androidx-constraintlayout = {group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraint-layout-version"}
+auto-service = {group = "com.google.auto.service", name = "auto-service", version.ref = "auto-service-version"}
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 data-store = {group = "androidx.datastore", name="datastore-preferences", version.ref="data-store-version"}
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
