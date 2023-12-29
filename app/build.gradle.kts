@@ -65,6 +65,8 @@ dependencies {
     //Fex box
     implementation(libs.flex.box)
 
+    debugImplementation(libs.kotlinx.coroutines.test)
+    debugImplementation(libs.robolectric)
     // Modules
     implementation(project(":core"))
     implementation(project(":domain"))
@@ -76,6 +78,7 @@ dependencies {
     implementation(project(":feature:onBoarding"))
     implementation(project(":navigation"))
     implementation(project(":test"))
+
 
 
 }

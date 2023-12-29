@@ -13,6 +13,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
 }
 dependencies{
     api(libs.androidx.test.core)
@@ -22,9 +31,9 @@ dependencies{
     api(libs.androidx.test.runner)
     api(libs.hilt.android.testing)
     api(libs.junit)
-    api(libs.kotlinx.coroutines.test)
-    api(libs.robolectric.shadows)
-    api(libs.robolectric)
+    debugImplementation(libs.kotlinx.coroutines.test)
+    debugImplementation(libs.robolectric.shadows)
+    debugImplementation(libs.robolectric)
     api(libs.auto.service)
 
     implementation(project(":domain:models"))
