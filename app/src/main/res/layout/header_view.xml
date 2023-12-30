@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/colorOnSurfaceVariant"
+    android:background="@color/drawer_layout_header"
 
     >
     <com.google.android.material.imageview.ShapeableImageView

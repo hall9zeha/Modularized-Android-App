@@ -46,7 +46,7 @@ class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
             _bind = DialogBookmarkAddBinding.inflate(LayoutInflater.from(activity))
 
             _bind?.let {
-                val builder = MaterialAlertDialogBuilder(ac)
+                val builder = MaterialAlertDialogBuilder(ac,core_res.style.CustomMaterialDialogStyle)
                     .setView(dialogView)
                     .setPositiveButton(getString(core_res.string.accept), null)
                     .setNegativeButton(getString(core_res.string.cancel), null)

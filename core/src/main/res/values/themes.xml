@@ -57,6 +57,12 @@
         <item name="colorControlHighlight">@color/md_theme_dark_error</item>
 
     </style>
-
+    <style name="CustomMaterialDialogStyle" parent="@style/MaterialAlertDialog.Material3">
+       <!-- <item name="android:textColor">@color/black</item>
+        <item name="colorPrimary">@color/seed</item>
+        <item name="colorSurface">@color/md_theme_light_tertiary</item>-->
+        <!--      <item name="android:typeface">monospace</item>
+              <item name="android:textSize">20sp</item>-->
+    </style>
 
 </resources>
