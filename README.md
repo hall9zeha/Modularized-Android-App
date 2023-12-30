@@ -21,6 +21,9 @@ Aplicación sencilla de bloc de notas que usa una arquitectura de modularizacion
 * Android sdk 34
 ## Estado del proyecto
 ![Badge Terminado](https://img.shields.io/badge/STATUS-%20TERMINADO-green)
+
+## Download demo 📂 [click here](https://github.com/hall9zeha/Modularized-Android-App/raw/main/docs/demo/notepad-release.apk)
+
 ## Se utilizó :wrench:
 El proyecto usa un catalogo central de versiones en el cual se van agregando las dependencias que se requieran y se comparte a los diferentes módulos, mejorando la escalabilidad y el mantenimiento del mismo.
 [catalog versions file](https://github.com/hall9zeha/Modularized-Android-App/blob/main/gradle/libs.versions.toml)
