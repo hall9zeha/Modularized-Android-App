@@ -35,7 +35,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddBookmarkDialog: DialogFragment(), DialogInterface.OnShowListener {
     private var _bind:DialogBookmarkAddBinding ?=null
     private val bind:DialogBookmarkAddBinding get() = _bind!!
-
     private var dialogView:View? = null
     private val viewModel:BookmarkViewModel by viewModels(ownerProducer = {requireParentFragment()})
     private lateinit var positiveButton:Button

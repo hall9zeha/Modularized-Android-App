@@ -35,6 +35,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvHeader"/>
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/btnClose"
+        android:src="@drawable/ic_close"
+        android:focusable="true"
+        android:clickable="true"
+        android:visibility="gone"
+        android:foreground="?attr/selectableItemBackground"
+        style="@style/Widget.Material3.Button.IconButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvHeader"/>
     <com.google.android.material.chip.ChipGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

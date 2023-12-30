@@ -132,6 +132,7 @@ class HomeFragment : Fragment() {
     private fun setUpBottomSheet(){
         bind.bottomSheetBookmark.tvHeader.text=getString(R.string.filter_title)
         bind.bottomSheetBookmark.btnAddBookmark.visibility=View.GONE
+        bind.bottomSheetBookmark.btnClose.visibility = View.VISIBLE
 
         bottomSheetBehavior = BottomSheetBehavior.from(bind.bottomSheetBookmark.bottomSheet)
         bottomSheetBehavior.state=BottomSheetBehavior.STATE_HIDDEN
@@ -147,6 +148,10 @@ class HomeFragment : Fragment() {
 
             }
         })
+        bind.bottomSheetBookmark.btnClose.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            bind.addFab.show()
+        }
     }
     private fun setUpBookmarksChipGroup(bookmarks:List<Tag>){
         bind.bottomSheetBookmark.bookmarkChips.removeAllViews()
