@@ -28,7 +28,8 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
 
     private var _bookmarkById:SingleMutableLiveData<Tag> = SingleMutableLiveData()
     val bookmarkById:SingleMutableLiveData<Tag> get()= _bookmarkById
-
+    private var _bookmarkIdSelectedFilter:SingleMutableLiveData<Long?> = SingleMutableLiveData()
+    val bookmarkIdSelectedFilter:SingleMutableLiveData<Long?> = _bookmarkIdSelectedFilter
     init{
         initScope()
     }
@@ -47,7 +48,9 @@ class BookmarkViewModel @Inject constructor(private val repository:TagRepository
         launch{_bookmarkById.postValue(repository.getTagById(id))}
     }
 
-
+    fun setBookmarkIdSelectedFilter(idSelected:Long?){
+        launch { _bookmarkIdSelectedFilter.value = idSelected }
+    }
     override fun onCleared() {
         destroyScope()
         super.onCleared()

@@ -25,6 +25,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.barryzea.bookmark.ui.view.BottomSheetBookmarks
 import com.barryzea.bookmark.ui.viewModel.BookmarkViewModel
 import com.barryzea.models.model.Note
 import com.barryzea.models.model.NoteAndTag
@@ -55,8 +56,6 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: MainAdapter
     private lateinit var staggeredGrid: StaggeredGridLayoutManager
     private lateinit var entity: NoteAndTag
-
-    private lateinit var bottomSheetBehavior:BottomSheetBehavior<View>
     private var isExpanded = false
     private var idItemSelected:Long?=null
     private val bind:FragmentHomeBinding get() = _bind!!
@@ -69,8 +68,8 @@ class HomeFragment : Fragment() {
         }
 
     }
-
-    override fun onAttach(context: Context) {
+    //Para manejar el evento onBackpressed del mainActivity desde aquí, pero ya no es necesario, solo lo mantenemos como ejemplo
+    /*override fun onAttach(context: Context) {
         super.onAttach(context)
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -82,7 +81,7 @@ class HomeFragment : Fragment() {
             }
         }
         activity?.onBackPressedDispatcher?.addCallback(onBackPressedCallback)
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,9 +98,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUpActionBarMenu()
-        setUpBottomSheet()
         setUpAdapter()
         setUpViewModel()
         setUpListeners()
@@ -116,9 +113,7 @@ class HomeFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when(menuItem.itemId){
                     R.id.filterItem->{
-
-                        if(isExpanded){ bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED;bind.addFab.hide()}
-                        else{bottomSheetBehavior.state=BottomSheetBehavior.STATE_EXPANDED;bind.addFab.show()}
+                        BottomSheetBookmarks().show(childFragmentManager.beginTransaction(),BottomSheetBookmarks::class.java.simpleName)
                     }
                     R.id.refreshItem->{
                         adapter.clear()
@@ -128,51 +123,6 @@ class HomeFragment : Fragment() {
                 return false //al retornar true inhabilitaba el evento del ícono de navegación del toolbar principal
             }
         },viewLifecycleOwner,Lifecycle.State.RESUMED)
-    }
-    private fun setUpBottomSheet(){
-        bind.bottomSheetBookmark.tvHeader.text=getString(R.string.filter_title)
-        bind.bottomSheetBookmark.btnAddBookmark.visibility=View.GONE
-        bind.bottomSheetBookmark.btnClose.visibility = View.VISIBLE
-
-        bottomSheetBehavior = BottomSheetBehavior.from(bind.bottomSheetBookmark.bottomSheet)
-        bottomSheetBehavior.state=BottomSheetBehavior.STATE_HIDDEN
-
-        bottomSheetBehavior.addBottomSheetCallback(object:BottomSheetCallback(){
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when(newState){
-                    BottomSheetBehavior.STATE_EXPANDED ->{isExpanded=true;bind.addFab.hide()}
-                    BottomSheetBehavior.STATE_COLLAPSED->{isExpanded=false;bind.addFab.show()}
-                }
-            }
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
-        })
-        bind.bottomSheetBookmark.btnClose.setOnClickListener {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            bind.addFab.show()
-        }
-    }
-    private fun setUpBookmarksChipGroup(bookmarks:List<Tag>){
-        bind.bottomSheetBookmark.bookmarkChips.removeAllViews()
-        bookmarks.forEach {bookmark->
-            val chip= Chip(context).apply {
-                id = bookmark.idTag.toInt()
-                text=bookmark.description
-                chipStrokeWidth = 3F
-                if(bookmark.color.isNotEmpty())chipStrokeColor = ColorStateList.valueOf(Color.parseColor(bookmark.color))
-                if(bookmark.color.isNotEmpty())rippleColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(255)
-                if(bookmark.color.isNotEmpty())chipBackgroundColor = ColorStateList.valueOf(Color.parseColor(bookmark.color)).withAlpha(160)
-
-                setOnClickListener {
-                    adapter.clear()
-                    viewModel.getNoteAndTagByTagId(bookmark.idTag)
-                   bottomSheetBehavior.state=BottomSheetBehavior.STATE_COLLAPSED
-                }
-            }
-            bind.bottomSheetBookmark.bookmarkChips.addView(chip)
-
-        }
     }
     private fun setUpViewModel(){
         viewModel.fetchAllRegisters()
@@ -198,12 +148,15 @@ class HomeFragment : Fragment() {
         viewModel.deletedRegisterRow.observe(viewLifecycleOwner){
             it?.let{adapter.removeItem(entity)}
         }
-        bookmarkViewModel.bookmarks.observe(viewLifecycleOwner){
-            it?.let{if(it.isNotEmpty()){setUpBookmarksChipGroup(it)} }
-        }
         viewModel.noteAndTagByTagId.observe(viewLifecycleOwner){
             it?.let{
                 adapter.addAll(it)
+            }
+        }
+        bookmarkViewModel.bookmarkIdSelectedFilter.observe(viewLifecycleOwner){
+            it?.let{
+                adapter.clear()
+                viewModel.getNoteAndTagByTagId(it)
             }
         }
 

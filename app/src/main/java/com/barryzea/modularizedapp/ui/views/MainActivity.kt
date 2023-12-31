@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
         setUpObservers()
         //setUpNavigator()
         changeActionbarTitle()
-        //onBackPressedDispatcher()
+        onBackPressedDispatcher()
 
         }
     private fun setUpToolbar(){
@@ -108,7 +108,6 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
             }
         }
     }
-    //Ya que estamos sobreecribiendo el evento backPressed en fragmentHome no usaremos esta función aquí
     private fun onBackPressedDispatcher(){
         onBackPressedDispatcher.addCallback(this,object :OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
