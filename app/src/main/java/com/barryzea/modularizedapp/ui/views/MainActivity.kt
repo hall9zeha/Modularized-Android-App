@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.barryzea.modularizedapp.R
+import com.barryzea.core.R as coreRes
 import com.barryzea.modularizedapp.databinding.ActivityMainBinding
 import com.barryzea.modularizedapp.ui.viewmodel.MainViewModel
 import com.barryzea.navigation.NavigationFlow
@@ -83,8 +84,8 @@ class MainActivity : AppCompatActivity(),ToFlowNavigatable {
     private fun changeActionbarTitle(){
         navController.addOnDestinationChangedListener{_, destination,_ ->
             when(destination.id){
-                R.id.homeFragment -> {supportActionBar?.title = "Home";bind.toolbarMain.visibility = View.VISIBLE}
-                com.barryzea.bookmark.R.id.bookmarkFragment ->{ supportActionBar?.title = "Bookmarks";bind.toolbarMain.visibility = View.VISIBLE}
+                R.id.homeFragment -> {supportActionBar?.title = getString(coreRes.string.home_title);bind.toolbarMain.visibility = View.VISIBLE}
+                com.barryzea.bookmark.R.id.bookmarkFragment ->{ supportActionBar?.title = getString(coreRes.string.bookmarks);bind.toolbarMain.visibility = View.VISIBLE}
                 com.barryzea.onboarding.R.id.onboardFragment->{bind.toolbarMain.visibility = View.GONE}
             }
         }

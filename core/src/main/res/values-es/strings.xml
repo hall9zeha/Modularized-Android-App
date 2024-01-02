@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notepad</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="long_press_msg">Presione sostenidamente para eliminar</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="empty_desc_error">Tiene que escribir algo</string>
+    <string name="select_color">Selecciona un color</string>
+    <string name="ok">Ok</string>
+    <string name="bookmark_title">Marcadores</string>
+    <string name="new_note">Nueva nota</string>
+    <string name="deleted_msg">Eliminado</string>
+    <string name="filter_title">Filtrar por marcador</string>
+    <string name="edit_note">Editando nota</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
+    <string name="first_screen_sample_title">Primera pantalla</string>
+    <string name="second_screen_sample_title">Segunda pantalla</string>
+    <string name="third_screen_sample_title">Tercera pantalla</string>
+    <string name="home_title">Inicio</string>
+    <string name="bookmarks">Marcadores</string>
+</resources>
