@@ -44,9 +44,9 @@ class BottomSheetBookmarks: BottomSheetDialogFragment() {
         bottomSheetBehavior.addBottomSheetCallback(object:BottomSheetCallback(){
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if(newState==BottomSheetBehavior.STATE_EXPANDED){
-                        bind.btnAddBookmark.visibility = View.GONE
+                       /* bind.btnAddBookmark.visibility = View.GONE
                         bind.btnClose.visibility = View.VISIBLE
-                        bind.tvHeader.text=getString(R.string.filter_title)
+                        bind.tvHeader.text=getString(R.string.filter_title)*/
                 }
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -59,6 +59,7 @@ class BottomSheetBookmarks: BottomSheetDialogFragment() {
         setUpObservers()
         return bottomSheetDialog
     }
+
 
     private fun setUpObservers(){
         viewModel.fetchAllTags()
