@@ -1,7 +1,7 @@
 # Modularized-Android-App
 <img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/core/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
 
-Aplicación sencilla de bloc de notas que usa una arquitectura de modularización con Android kotlin 
+Aplicación sencilla de bloc de notas que usa una arquitectura de modularización con Android kotlin.
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/hall9zeha/Modularized-Android-App/blob/main/README.md)
 

@@ -1,7 +1,7 @@
 # Modularized-Android-App
 <img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/core/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
 
-Simple notepad app using modularization architecture with Android kotlin
+Simple notepad app using modularization architecture with Android kotlin.
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/hall9zeha/Modularized-Android-App/blob/main/README.md) [![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/hall9zeha/Modularized-Android-App/blob/main/README.es.md)
 
