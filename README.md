@@ -1,5 +1,5 @@
 # Modularized-Android-App
-<img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/core/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
+<img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/core/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%"/>
 
 Simple notepad app using modularization architecture with Android kotlin.
 
@@ -54,7 +54,7 @@ Algunas librerías usadas en el proyecto:
 
 ## Database relational model
 
-<img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/db_graph.png"  alt="drawing" width="70%" height="70%"/>
+<img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/db_graph.png"  alt="drawing" width="70%"/>
 
 ## Features :memo:
 * Show step-by-step presentation when you first open the application 
@@ -66,7 +66,7 @@ Algunas librerías usadas en el proyecto:
 
 ||||
 |--|--|--|
-|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen1.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen2.jpg" alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen3.jpg"  alt="drawing" width="70%" height="70%"/></p>
-|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen4.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen5.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen6.jpg"  alt="drawing" width="70%" height="70%"/></p>
-|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen7.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen8.jpg"  alt="drawing" width="70%" height="70%"/></p>|
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen1.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen2.jpg" alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen3.jpg"  alt="drawing" width="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen4.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen5.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen6.jpg"  alt="drawing" width="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen7.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/Modularized-Android-App/blob/main/docs/images/screen8.jpg"  alt="drawing" width="70%"/></p>|
 
