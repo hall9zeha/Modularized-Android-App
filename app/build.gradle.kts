@@ -65,8 +65,8 @@ dependencies {
     //Fex box
     implementation(libs.flex.box)
 
-    debugImplementation(libs.kotlinx.coroutines.test)
-    debugImplementation(libs.robolectric)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric)
     // Modules
     implementation(project(":core"))
     implementation(project(":domain"))
