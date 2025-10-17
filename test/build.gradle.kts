@@ -31,9 +31,9 @@ dependencies{
     api(libs.androidx.test.runner)
     api(libs.hilt.android.testing)
     api(libs.junit)
-    debugImplementation(libs.kotlinx.coroutines.test)
-    debugImplementation(libs.robolectric.shadows)
-    debugImplementation(libs.robolectric)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric.shadows)
+    testImplementation(libs.robolectric)
     api(libs.auto.service)
 
     implementation(project(":domain:models"))
